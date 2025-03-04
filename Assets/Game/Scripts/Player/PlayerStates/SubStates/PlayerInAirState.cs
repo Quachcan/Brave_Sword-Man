@@ -1,20 +1,31 @@
-using Game.Script.Player.Config;
-using Game.Script.Player.PlayerFiniteStateMachine;
-using Game.Script.Player.PlayerStates.SuperStates;
+using Game.Scripts.Player.Config;
+using Game.Scripts.Player.PlayerFiniteStateMachine;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-namespace Game.Script.Player.PlayerStates.SubStates
+namespace Game.Scripts.Player.PlayerStates.SubStates
 {
     public class PlayerInAirState : PlayerState
     {
         private static readonly int YVelocity = Animator.StringToHash("yVelocity");
         private static readonly int XVelocity = Animator.StringToHash("xVelocity");
+
+        #region Input
         private int xInput;
         private bool isGrounded;
         private bool jumpInput;
         private bool jumpInputStop;
+        private bool grabInput;
+        #endregion
+        
+        #region Check
         private bool isJumping;
-        public PlayerInAirState(PlayerManager playerManager, PlayerStateMachine playerStateMachine, PlayerConfig playerConfig, string animBoolName) : base(playerManager, playerStateMachine, playerConfig, animBoolName)
+        private bool isTouchingWall;
+        private bool isTouchingWallBack;
+        private bool isTouchingLedge;
+        #endregion
+        public PlayerInAirState(PlayerManager playerManager, PlayerStateMachine playerStateMachine, PlayerConfig playerConfig, string animBoolName) : 
+            base(playerManager, playerStateMachine, playerConfig, animBoolName)
         {
         }
 
@@ -32,43 +43,60 @@ namespace Game.Script.Player.PlayerStates.SubStates
         {
             base.LogicUpdate();
             
-            xInput = playerManager.InputHandler.NormalizeInputX;
-            jumpInput = playerManager.InputHandler.JumpInput;
-            jumpInputStop = playerManager.InputHandler.JumpInputStop;
+            xInput = PlayerManager.InputHandler.NormalizeInputX;
+            jumpInput = PlayerManager.InputHandler.JumpInput;
+            jumpInputStop = PlayerManager.InputHandler.JumpInputStop;
+            grabInput = PlayerManager.InputHandler.GrabInput;
             
             CheckJumpMultiplier();
 
-            if (isGrounded && playerManager.CurrentVelocity.y < 0.01f)
+            if (isGrounded && PlayerManager.CurrentVelocity.y <= 0f)
             {
-                playerStateMachine.ChangeState(playerManager.LandState);
+                PlayerStateMachine.ChangeState(PlayerManager.LandState);
             }
-            else if (jumpInput && playerManager.JumpState.CanJump())
+            else if (isTouchingWall && !isTouchingLedge && !isGrounded)
             {
-                playerStateMachine.ChangeState(playerManager.JumpState);
+                PlayerStateMachine.ChangeState(PlayerManager.LedgeClimbState);
             }
-            else
+            else if (jumpInput && (isTouchingWall || isTouchingWallBack))
             {
-                playerManager.CheckIfShouldFlip(xInput);
-                playerManager.SetVelocityX(playerConfig.movementVelocity * xInput);
+                isTouchingWall = PlayerManager.CheckIfTouchingWall();
+                PlayerManager.WallJumpState.DetermineWallJumpDirection(isTouchingWall);
+                PlayerStateMachine.ChangeState(PlayerManager.WallJumpState);
+            }
+            else if (jumpInput && PlayerManager.JumpState.CanJump())
+            {
+                PlayerStateMachine.ChangeState(PlayerManager.JumpState);
+            }
+            else if (isTouchingWall && grabInput && isTouchingLedge)
+            {
+                PlayerStateMachine.ChangeState(PlayerManager.WallGrabState);
+            }
+            else if (isTouchingWall && xInput == PlayerManager.FacingDirection && PlayerManager.CurrentVelocity.y <= 0)
+            {
+                PlayerStateMachine.ChangeState(PlayerManager.WallSlideState);
+            }
+            else 
+            {
+                PlayerManager.CheckIfShouldFlip(xInput);
+                PlayerManager.SetVelocityX(PlayerConfig.movementVelocity * xInput);
                 
-                playerManager.Anim.SetFloat(YVelocity, playerManager.CurrentVelocity.y);
-                playerManager.Anim.SetFloat(XVelocity, Mathf.Abs(playerManager.CurrentVelocity.x) );
+                PlayerManager.Anim.SetFloat(YVelocity, PlayerManager.CurrentVelocity.y);
+                PlayerManager.Anim.SetFloat(XVelocity, Mathf.Abs(PlayerManager.CurrentVelocity.x) );
             }
         }
 
         private void CheckJumpMultiplier()
         {
-            if (isJumping)
+            if (!isJumping) return;
+            if (jumpInputStop)
             {
-                if (jumpInputStop)
-                {
-                    playerManager.SetVelocityY(playerManager.CurrentVelocity.y * playerConfig.variableJumpHeightMultiplier);
-                    isJumping = false;
-                }
-                else if(playerManager.CurrentVelocity.y < 0f)
-                {
-                    isJumping = false;
-                }
+                PlayerManager.SetVelocityY(PlayerManager.CurrentVelocity.y * PlayerConfig.variableJumpHeightMultiplier);
+                isJumping = false;
+            }
+            else if(PlayerManager.CurrentVelocity.y < 0f)
+            {
+                isJumping = false;
             }
         }
 
@@ -81,7 +109,15 @@ namespace Game.Script.Player.PlayerStates.SubStates
         {
             base.DoChecks();
 
-            isGrounded = playerManager.CheckIfGrounded();
+            isGrounded = PlayerManager.CheckIfGrounded();
+            isTouchingWall = PlayerManager.CheckIfTouchingWall();
+            isTouchingWallBack = PlayerManager.CheckIfTouchingWallBack();
+            isTouchingLedge = PlayerManager.CheckIfTouchingLedge();
+
+            if (isTouchingWall && !isTouchingLedge)
+            {
+                PlayerManager.LedgeClimbState.SetDetectedPosition(PlayerManager.transform.position);
+            }
         }
         
         public void SetIsJumping() => isJumping = true;

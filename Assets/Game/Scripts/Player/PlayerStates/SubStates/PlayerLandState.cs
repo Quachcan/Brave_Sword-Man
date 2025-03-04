@@ -1,12 +1,13 @@
-using Game.Script.Player.Config;
-using Game.Script.Player.PlayerFiniteStateMachine;
-using Game.Script.Player.PlayerStates.SuperStates;
+using Game.Scripts.Player.Config;
+using Game.Scripts.Player.PlayerFiniteStateMachine;
+using Game.Scripts.Player.PlayerStates.SuperStates;
 
-namespace Game.Script.Player.PlayerStates.SubStates
+namespace Game.Scripts.Player.PlayerStates.SubStates
 {
     public class PlayerLandState : PlayerGroundedState
     {
-        public PlayerLandState(PlayerManager playerManager, PlayerStateMachine playerStateMachine, PlayerConfig playerConfig, string animBoolName) : base(playerManager, playerStateMachine, playerConfig, animBoolName)
+        public PlayerLandState(PlayerManager playerManager, PlayerStateMachine playerStateMachine, PlayerConfig playerConfig, string animBoolName) : 
+            base(playerManager, playerStateMachine, playerConfig, animBoolName)
         {
         }
         
@@ -24,13 +25,14 @@ namespace Game.Script.Player.PlayerStates.SubStates
         {
             base.LogicUpdate();
 
+            if (IsExitingState) return;
             if (XInput != 0)
             {
-                playerStateMachine.ChangeState(playerManager.MoveState);
+                PlayerStateMachine.ChangeState(PlayerManager.MoveState);
             }
-            else if (isAnimationFinished)
+            else if (IsAnimationFinished)
             {
-                playerStateMachine.ChangeState(playerManager.IdleState);
+                PlayerStateMachine.ChangeState(PlayerManager.IdleState);
             }
         }
 

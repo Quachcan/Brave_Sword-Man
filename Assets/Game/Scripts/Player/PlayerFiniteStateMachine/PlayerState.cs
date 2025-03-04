@@ -1,41 +1,43 @@
-using Game.Script.Manager;
-using Game.Script.Player.Config;
+using Game.Scripts.Player.Config;
 using UnityEngine;
 
-namespace Game.Script.Player.PlayerFiniteStateMachine
+namespace Game.Scripts.Player.PlayerFiniteStateMachine
 {
     public class PlayerState
     {
-        protected PlayerManager playerManager;
-        protected PlayerStateMachine playerStateMachine;
-        protected PlayerConfig playerConfig;
+        protected readonly PlayerManager PlayerManager;
+        protected readonly PlayerStateMachine PlayerStateMachine;
+        protected readonly PlayerConfig PlayerConfig;
 
-        protected float startTime;
-        protected bool isAnimationFinished;    
+        protected float StartTime;
+        protected bool IsAnimationFinished;    
+        protected bool IsExitingState;
         
-        private string animBoolName;
+        private readonly string animBoolName;
 
-        public PlayerState(PlayerManager playerManager, PlayerStateMachine playerStateMachine,
+        protected PlayerState(PlayerManager playerManager, PlayerStateMachine playerStateMachine,
             PlayerConfig playerConfig, string animBoolName)
         {
-            this.playerManager = playerManager;
-            this.playerStateMachine = playerStateMachine;
-            this.playerConfig = playerConfig;
+            this.PlayerManager = playerManager;
+            this.PlayerStateMachine = playerStateMachine;
+            this.PlayerConfig = playerConfig;
             this.animBoolName = animBoolName;
         }
 
         public virtual void Enter()
         {
-            playerManager.Anim.SetBool(animBoolName, true);
+            PlayerManager.Anim.SetBool(animBoolName, true);
             DoChecks();
-            startTime = Time.time;
-            Debug.Log(animBoolName);
-            isAnimationFinished = false;
+            StartTime = Time.time;
+            //Debug.Log(animBoolName);
+            IsAnimationFinished = false;
+            IsExitingState = false;
         }
 
         public virtual void Exit()
         {
-            playerManager.Anim.SetBool(animBoolName, false);
+            PlayerManager.Anim.SetBool(animBoolName, false);
+            IsAnimationFinished = true;
         }
 
         public virtual void LogicUpdate()
@@ -58,6 +60,6 @@ namespace Game.Script.Player.PlayerFiniteStateMachine
             
         }
 
-        public virtual void AnimationFinishTrigger() => isAnimationFinished = true;
+        public virtual void AnimationFinishTrigger() => IsAnimationFinished = true;
     }
 }

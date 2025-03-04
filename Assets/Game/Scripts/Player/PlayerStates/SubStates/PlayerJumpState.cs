@@ -1,15 +1,15 @@
-using Game.Script.Player.Config;
-using Game.Script.Player.PlayerFiniteStateMachine;
-using Game.Script.Player.PlayerStates.SuperStates;
-using UnityEngine;
+using Game.Scripts.Player.Config;
+using Game.Scripts.Player.PlayerFiniteStateMachine;
+using Game.Scripts.Player.PlayerStates.SuperStates;
 
-namespace Game.Script.Player.PlayerStates.SubStates
+namespace Game.Scripts.Player.PlayerStates.SubStates
 {
     public class PlayerJumpState : PlayerAbilityState
     {
-        public int amountOfJumpsLeft;
+        private int amountOfJumpsLeft;
         
-        public PlayerJumpState(PlayerManager playerManager, PlayerStateMachine playerStateMachine, PlayerConfig playerConfig, string animBoolName) : base(playerManager, playerStateMachine, playerConfig, animBoolName)
+        public PlayerJumpState(PlayerManager playerManager, PlayerStateMachine playerStateMachine, PlayerConfig playerConfig, string animBoolName) : 
+            base(playerManager, playerStateMachine, playerConfig, animBoolName)
         {
             amountOfJumpsLeft = playerConfig.amountOfJumps;
         }
@@ -18,10 +18,11 @@ namespace Game.Script.Player.PlayerStates.SubStates
         {
             base.Enter();
             
-            playerManager.SetVelocityY(playerConfig.jumpVelocity);
+            PlayerManager.InputHandler.UseJumpInput();
+            PlayerManager.SetVelocityY(PlayerConfig.jumpVelocity);
             IsAbilityDone = true;
             amountOfJumpsLeft--;
-            playerManager.InAirState.SetIsJumping();
+            PlayerManager.InAirState.SetIsJumping();
         }
 
         public bool CanJump()
@@ -30,7 +31,7 @@ namespace Game.Script.Player.PlayerStates.SubStates
             return false;
         }
         
-        public void ResetAmountOfJumpsLeft() => amountOfJumpsLeft = playerConfig.amountOfJumps;
+        public void ResetAmountOfJumpsLeft() => amountOfJumpsLeft = PlayerConfig.amountOfJumps;
         
         public void DecreaseAmountOfJumpsLeft() => amountOfJumpsLeft--;
     }

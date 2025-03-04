@@ -1,14 +1,13 @@
-using Game.Script.Manager;
-using Game.Script.Player.Config;
-using Game.Script.Player.PlayerFiniteStateMachine;
-using Game.Script.Player.PlayerStates.SuperStates;
-using UnityEngine;
+using Game.Scripts.Player.Config;
+using Game.Scripts.Player.PlayerFiniteStateMachine;
+using Game.Scripts.Player.PlayerStates.SuperStates;
 
-namespace Game.Script.Player.PlayerStates.SubStates
+namespace Game.Scripts.Player.PlayerStates.SubStates
 {
     public class PlayerMoveState : PlayerGroundedState
     {
-        public PlayerMoveState(PlayerManager playerManager, PlayerStateMachine playerStateMachine, PlayerConfig playerConfig, string animBoolName) : base(playerManager, playerStateMachine, playerConfig, animBoolName)
+        public PlayerMoveState(PlayerManager playerManager, PlayerStateMachine playerStateMachine, PlayerConfig playerConfig, string animBoolName) : 
+            base(playerManager, playerStateMachine, playerConfig, animBoolName)
         {
             
         }
@@ -27,12 +26,13 @@ namespace Game.Script.Player.PlayerStates.SubStates
         {
             base.LogicUpdate();
             
-            playerManager.CheckIfShouldFlip(XInput);
+            PlayerManager.CheckIfShouldFlip(XInput);
             
-            playerManager.SetVelocityX(playerConfig.movementVelocity * XInput);
-            if (XInput == 0)
+            PlayerManager.SetVelocityX(PlayerConfig.movementVelocity * XInput);
+            
+            if (XInput == 0 && !IsExitingState)
             {
-                playerStateMachine.ChangeState(playerManager.IdleState);
+                PlayerStateMachine.ChangeState(PlayerManager.IdleState);
             }
         }
 

@@ -12,11 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46dc5c0f6523d47938ddd749d168b454, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  movementVelocity: 5
-  jumpVelocity: 13
-  amountOfJumps: 1
+  movementVelocity: 8
+  jumpVelocity: 15
+  amountOfJumps: 2
   variableJumpHeightMultiplier: 0.5
+  dashCooldown: 0.5
+  dashDuration: 0.14
+  dashVelocity: 40
+  drag: 10
+  distanceBetweenAfterImage: 0.5
+  wallJumpVelocity: 25
+  wallJumpTime: 0.4
+  wallJumpAngle: {x: 1, y: 1.5}
+  wallSlideVelocity: 1.5
+  wallClimbVelocity: 3
+  startOffset: {x: 0.5, y: 0.7}
+  endOffset: {x: 0.7, y: 1}
   groundCheckRadius: 0.3
+  wallCheckDistance: 0.7
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8

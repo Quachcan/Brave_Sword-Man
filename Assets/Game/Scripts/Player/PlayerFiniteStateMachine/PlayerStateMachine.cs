@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Game.Script.Player.PlayerFiniteStateMachine
+namespace Game.Scripts.Player.PlayerFiniteStateMachine
 {
     public class PlayerStateMachine
     {

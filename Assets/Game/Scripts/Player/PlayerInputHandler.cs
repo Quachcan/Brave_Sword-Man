@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Game.Script.Player
+namespace Game.Scripts.Player
 {
     public class PlayerInputHandler : MonoBehaviour
     {
@@ -11,6 +10,8 @@ namespace Game.Script.Player
         public int NormalizeInputY {get; private set;}
         public bool JumpInput {get; private set;}
         public bool JumpInputStop {get; private set;}
+        public bool GrabInput {get; private set;}
+        public bool DashInput {get; private set;}
 
         [SerializeField] private float inputHoldTime = 0.2f;
         
@@ -26,7 +27,7 @@ namespace Game.Script.Player
             RawMovementInput = context.ReadValue<Vector2>();
             
             NormalizeInputX = (int)(RawMovementInput * Vector2.right).x;
-            NormalizeInputY = (int)(RawMovementInput * Vector2.left).y;
+            NormalizeInputY = (int)(RawMovementInput * Vector2.up).y;
             Debug.Log(RawMovementInput);
         }
 
@@ -45,6 +46,31 @@ namespace Game.Script.Player
             }
         }
 
+        public void OnGrabInput(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                GrabInput = true;
+            }
+
+            if (context.canceled)
+            {
+                GrabInput = false;
+            }
+        }
+
+        public void OnDashInput(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                DashInput = true;
+            }
+            else if (context.canceled)
+            {
+                DashInput = false;
+            }
+        }
+        
         private void CheckJumpInputHoldTime()
         {
             if (Time.time > jumpInputStartTime + inputHoldTime)
@@ -54,5 +80,6 @@ namespace Game.Script.Player
         }
 
         public void UseJumpInput() => JumpInput = false;
+        public void UseDashInput() => DashInput = false;
     }
 }
