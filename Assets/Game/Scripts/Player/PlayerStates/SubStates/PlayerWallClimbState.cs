@@ -15,7 +15,7 @@ namespace Game.Scripts.Player.PlayerStates.SubStates
             base.LogicUpdate();
 
             if (IsExitingState) return;
-            PlayerManager.SetVelocityY(PlayerConfig.wallClimbVelocity);
+            Core.Movement.SetVelocityY(PlayerConfig.wallClimbVelocity);
 
             if (YInput != 1)
             {

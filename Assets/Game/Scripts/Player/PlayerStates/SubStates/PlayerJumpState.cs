@@ -19,7 +19,7 @@ namespace Game.Scripts.Player.PlayerStates.SubStates
             base.Enter();
             
             PlayerManager.InputHandler.UseJumpInput();
-            PlayerManager.SetVelocityY(PlayerConfig.jumpVelocity);
+            Core.Movement.SetVelocityY(PlayerConfig.jumpVelocity);
             IsAbilityDone = true;
             amountOfJumpsLeft--;
             PlayerManager.InAirState.SetIsJumping();

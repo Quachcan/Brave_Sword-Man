@@ -13,8 +13,8 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
-  - 
+  - Weapon
+  - Damageable
   - 
   - 
   - 
@@ -40,6 +40,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 3338672431
     locked: 0
   m_RenderingLayers:
   - Default

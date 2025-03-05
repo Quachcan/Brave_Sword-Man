@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,24 +12,56 @@ namespace Game.Scripts.Player
         public bool JumpInput {get; private set;}
         public bool JumpInputStop {get; private set;}
         public bool GrabInput {get; private set;}
-        public bool DashInput {get; private set;}
+        public bool DodgeInput {get; private set;}
+        
+        public bool[] AttackInputs  {get; private set;}
 
         [SerializeField] private float inputHoldTime = 0.2f;
         
         private float jumpInputStartTime;
+
+        private void Start()
+        {
+            var count = Enum.GetValues(typeof(CombatInputs)).Length;
+            AttackInputs = new bool[count];
+        }
 
         private void Update()
         {
             CheckJumpInputHoldTime();
         }
 
+        public void OnPrimaryAttackInput(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                AttackInputs[(int)CombatInputs.Primary] = true;
+            }
+            if (context.canceled)
+            {
+                AttackInputs[(int)CombatInputs.Primary] = false;
+            }
+        }
+
+        public void OnSecondaryAttackInput(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                AttackInputs[(int)CombatInputs.Secondary] = true;
+            }
+            if (context.canceled)
+            {
+                AttackInputs[(int)CombatInputs.Secondary] = false;
+            }
+        }
+
         public void OnMoveInput(InputAction.CallbackContext context)
         {
             RawMovementInput = context.ReadValue<Vector2>();
             
-            NormalizeInputX = (int)(RawMovementInput * Vector2.right).x;
-            NormalizeInputY = (int)(RawMovementInput * Vector2.up).y;
-            Debug.Log(RawMovementInput);
+            NormalizeInputX = Mathf.RoundToInt(RawMovementInput.x);
+            NormalizeInputY = Mathf.RoundToInt(RawMovementInput.y);
+            //Debug.Log(RawMovementInput);
         }
 
         public void OnJumpInput(InputAction.CallbackContext context)
@@ -59,15 +92,15 @@ namespace Game.Scripts.Player
             }
         }
 
-        public void OnDashInput(InputAction.CallbackContext context)
+        public void OnDodgeInput(InputAction.CallbackContext context)
         {
             if (context.started)
             {
-                DashInput = true;
+                DodgeInput = true;
             }
             else if (context.canceled)
             {
-                DashInput = false;
+                DodgeInput = false;
             }
         }
         
@@ -80,6 +113,12 @@ namespace Game.Scripts.Player
         }
 
         public void UseJumpInput() => JumpInput = false;
-        public void UseDashInput() => DashInput = false;
+        public void UseDashInput() => DodgeInput = false;
+    }
+    
+    public enum CombatInputs
+    {
+        Primary,
+        Secondary
     }
 }

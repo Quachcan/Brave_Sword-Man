@@ -14,31 +14,21 @@ namespace Game.Scripts.Player.PlayerStates.SubStates
         public override void Enter()
         {
             base.Enter();
-            PlayerManager.SetVelocityX(0f);
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
+            Core.Movement.SetVelocityX(0f);
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if (XInput != 0 && !IsExitingState)
+            if(IsExitingState) return;
+            if (XInput != 0)
             {
                 PlayerStateMachine.ChangeState(PlayerManager.MoveState);
             }
-        }
-
-        public override void PhysicsUpdate()
-        {
-            base.PhysicsUpdate();
-        }
-
-        public override void DoChecks()
-        {
-            base.DoChecks();
+            else if (YInput == -1)
+            {
+                PlayerStateMachine.ChangeState(PlayerManager.CrouchIdleState);
+            }
         }
     }
 }

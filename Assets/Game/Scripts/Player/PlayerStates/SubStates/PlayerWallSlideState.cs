@@ -18,7 +18,7 @@ namespace Game.Scripts.Player.PlayerStates.SubStates
 
             if (!IsExitingState)
             {
-                PlayerManager.SetVelocityY(-PlayerConfig.wallSlideVelocity);
+                Core.Movement.SetVelocityY(-PlayerConfig.wallSlideVelocity);
 
                 if (GrabInput && YInput == 0)
                 {

@@ -1,10 +1,13 @@
 using Game.Scripts.Player.Config;
+using Game.Scripts.Cores;
 using UnityEngine;
 
 namespace Game.Scripts.Player.PlayerFiniteStateMachine
 {
     public class PlayerState
     {
+        protected Cores.Core Core;
+        
         protected readonly PlayerManager PlayerManager;
         protected readonly PlayerStateMachine PlayerStateMachine;
         protected readonly PlayerConfig PlayerConfig;
@@ -12,6 +15,7 @@ namespace Game.Scripts.Player.PlayerFiniteStateMachine
         protected float StartTime;
         protected bool IsAnimationFinished;    
         protected bool IsExitingState;
+        protected bool IsAbilityUnlocked;
         
         private readonly string animBoolName;
 
@@ -22,6 +26,7 @@ namespace Game.Scripts.Player.PlayerFiniteStateMachine
             this.PlayerStateMachine = playerStateMachine;
             this.PlayerConfig = playerConfig;
             this.animBoolName = animBoolName;
+            Core = PlayerManager.Core;
         }
 
         public virtual void Enter()

@@ -24,7 +24,7 @@ namespace Game.Scripts.Player.PlayerStates.SuperStates
             base.LogicUpdate();
             if (IsAbilityDone)
             {
-                if (isGrounded && PlayerManager.CurrentVelocity.y <= 0.01f)
+                if (isGrounded && Core.Movement.CurrentVelocity.y <= 0.01f)
                 {
                     PlayerStateMachine.ChangeState(PlayerManager.IdleState);
                 }
@@ -39,7 +39,7 @@ namespace Game.Scripts.Player.PlayerStates.SuperStates
         {
             base.DoChecks();
 
-            isGrounded = PlayerManager.CheckIfGrounded();
+            isGrounded = Core.CollisionSenses.Ground;
         }
     }
 }

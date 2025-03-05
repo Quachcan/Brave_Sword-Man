@@ -12,38 +12,23 @@ namespace Game.Scripts.Player.PlayerStates.SubStates
             
         }
 
-        public override void Enter()
-        {
-            base.Enter();
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
-        }
-
         public override void LogicUpdate()
         {
             base.LogicUpdate();
             
-            PlayerManager.CheckIfShouldFlip(XInput);
+            Core.Movement.CheckIfShouldFlip(XInput);
             
-            PlayerManager.SetVelocityX(PlayerConfig.movementVelocity * XInput);
+            Core.Movement.SetVelocityX(PlayerConfig.movementVelocity * XInput);
             
-            if (XInput == 0 && !IsExitingState)
+            if(IsExitingState) return;
+            if (XInput == 0)
             {
                 PlayerStateMachine.ChangeState(PlayerManager.IdleState);
             }
-        }
-
-        public override void PhysicsUpdate()
-        {
-            base.PhysicsUpdate();
-        }
-
-        public override void DoChecks()
-        {
-            base.DoChecks();
+            else if (YInput == -1)
+            {
+                PlayerStateMachine.ChangeState(PlayerManager.CrouchMoveState);
+            }
         }
     }
 }

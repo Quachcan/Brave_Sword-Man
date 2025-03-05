@@ -34,7 +34,7 @@ namespace Game.Scripts.Player.PlayerStates.SuperStates
             {
                 PlayerStateMachine.ChangeState(PlayerManager.IdleState);
             }
-            else if (!IsTouchingWall || (XInput != PlayerManager.FacingDirection && !GrabInput))
+            else if (!IsTouchingWall || (XInput != Core.Movement.FacingDirection && !GrabInput))
             {
                 PlayerStateMachine.ChangeState(PlayerManager.InAirState);
             }
@@ -48,9 +48,9 @@ namespace Game.Scripts.Player.PlayerStates.SuperStates
         {
             base.DoChecks();
             
-            IsGrounded = PlayerManager.CheckIfGrounded();
-            IsTouchingWall = PlayerManager.CheckIfTouchingWall();
-            IsTouchingLedge = PlayerManager.CheckIfTouchingLedge();
+            IsGrounded = Core.CollisionSenses.Ground;
+            IsTouchingWall = Core.CollisionSenses.WallFront;
+            IsTouchingLedge = Core.CollisionSenses.LedgeHorizontal;
 
             if (!IsTouchingLedge && IsTouchingWall)
             {

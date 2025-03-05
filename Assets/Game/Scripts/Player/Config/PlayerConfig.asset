@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   movementVelocity: 8
+  crouchMovementVelocity: 5
+  crouchColliderHeight: 1.7
+  standColliderHeight: 2.4
   jumpVelocity: 15
   amountOfJumps: 2
   variableJumpHeightMultiplier: 0.5
-  dashCooldown: 0.5
-  dashDuration: 0.14
-  dashVelocity: 40
-  drag: 10
-  distanceBetweenAfterImage: 0.5
+  dashCooldown: 1.5
+  dodgeDuration: 0.3
+  dodgeVelocity: 30
+  drag: 0
   wallJumpVelocity: 25
   wallJumpTime: 0.4
   wallJumpAngle: {x: 1, y: 1.5}
@@ -28,8 +30,3 @@ MonoBehaviour:
   wallClimbVelocity: 3
   startOffset: {x: 0.5, y: 0.7}
   endOffset: {x: 0.7, y: 1}
-  groundCheckRadius: 0.3
-  wallCheckDistance: 0.7
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 8

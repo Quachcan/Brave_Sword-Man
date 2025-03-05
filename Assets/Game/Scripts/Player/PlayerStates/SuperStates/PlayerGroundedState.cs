@@ -6,6 +6,9 @@ namespace Game.Scripts.Player.PlayerStates.SuperStates
     public class PlayerGroundedState : PlayerState
     {
         protected int XInput;
+        protected int YInput;
+        
+        protected bool IsTouchingCeiling;
 
         private bool jumpInput;
         private bool grabInput;
@@ -23,7 +26,7 @@ namespace Game.Scripts.Player.PlayerStates.SuperStates
         {
             base.Enter(); 
             PlayerManager.JumpState.ResetAmountOfJumpsLeft();
-            PlayerManager.DashState.ResetCanDash();
+            PlayerManager.DodgeState.ResetCanDash();
         }
         
 
@@ -31,24 +34,35 @@ namespace Game.Scripts.Player.PlayerStates.SuperStates
         {
             base.LogicUpdate();
             XInput = PlayerManager.InputHandler.NormalizeInputX; 
+            YInput = PlayerManager.InputHandler.NormalizeInputY;
             jumpInput = PlayerManager.InputHandler.JumpInput;
             grabInput = PlayerManager.InputHandler.GrabInput;
-            dashInput = PlayerManager.InputHandler.DashInput;
+            dashInput = PlayerManager.InputHandler.DodgeInput;
 
-            if (jumpInput && PlayerManager.JumpState.CanJump())
+            if (PlayerManager.InputHandler.AttackInputs[(int)CombatInputs.Primary] && !IsTouchingCeiling)
+            {
+                PlayerStateMachine.ChangeState(PlayerManager.PrimaryAttackState);
+            }
+            else if (PlayerManager.InputHandler.AttackInputs[(int)CombatInputs.Secondary] && !IsTouchingCeiling)
+            {
+                PlayerStateMachine.ChangeState(PlayerManager.SecondaryAttackState);
+            }
+            else if (jumpInput && PlayerManager.JumpState.CanJump())
             {
                 PlayerStateMachine.ChangeState(PlayerManager.JumpState);
-            }else if(!isGrounded)
+            }
+            else if(!isGrounded)
             {
                 PlayerManager.JumpState.DecreaseAmountOfJumpsLeft();
                 PlayerStateMachine.ChangeState(PlayerManager.InAirState);
-            }else if (isTouchingWall && grabInput && isTouchingLedge)
+            }
+            else if (isTouchingWall && grabInput && isTouchingLedge)
             {
                 PlayerStateMachine.ChangeState(PlayerManager.WallGrabState);
             }
-            else if (isGrounded && dashInput)
+            else if (isGrounded && dashInput && !IsTouchingCeiling)
             {
-                PlayerStateMachine.ChangeState(PlayerManager.DashState);
+                PlayerStateMachine.ChangeState(PlayerManager.DodgeState);
             }
         }
 
@@ -56,9 +70,10 @@ namespace Game.Scripts.Player.PlayerStates.SuperStates
         {
             base.DoChecks();
             
-            isGrounded = PlayerManager.CheckIfGrounded();
-            isTouchingWall = PlayerManager.CheckIfTouchingWall();
-            isTouchingLedge = PlayerManager.CheckIfTouchingLedge();
+            isGrounded = Core.CollisionSenses.Ground;
+            isTouchingWall = Core.CollisionSenses.WallFront;
+            isTouchingLedge = Core.CollisionSenses.LedgeHorizontal;
+            IsTouchingCeiling = Core.CollisionSenses.Ceiling;
         }
     }
 }

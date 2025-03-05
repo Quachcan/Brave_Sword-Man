@@ -152,12 +152,12 @@ TextureImporter:
       name: _WallSlide_0
       rect:
         serializedVersion: 2
-        x: 48
+        x: 50
         y: 2
         width: 22
         height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.6, y: 0.4999998}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -174,12 +174,12 @@ TextureImporter:
       name: _WallSlide_1
       rect:
         serializedVersion: 2
-        x: 168
+        x: 170
         y: 2
         width: 22
         height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.6, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -196,12 +196,12 @@ TextureImporter:
       name: _WallSlide_2
       rect:
         serializedVersion: 2
-        x: 288
+        x: 290
         y: 2
         width: 22
         height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.6, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

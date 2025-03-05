@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Scripts.Player.Config
 {
@@ -8,17 +9,21 @@ namespace Game.Scripts.Player.Config
         [Header("MoveState")]
         public float movementVelocity = 10;
         
+        [Header("CrouchState")]
+        public float crouchMovementVelocity = 5f;
+        public float crouchColliderHeight = 1f;
+        public float standColliderHeight = 2.4f;
+        
         [Header("JumpState")]
         public float jumpVelocity = 15f;
         public int amountOfJumps = 1;
         public float variableJumpHeightMultiplier = 0.5f;
 
-        [Header("DashState")]
+        [Header("DodgeState")]
         public float dashCooldown = 0.5f;
-        public float dashDuration = 0.5f;
-        public float dashVelocity = 30f;
+        public float dodgeDuration = 0.5f;
+        public float dodgeVelocity = 30f;
         public float drag = 10f;
-        public float distanceBetweenAfterImage = 0.5f;
         
         [Header("WallJumpState")]
         public float wallJumpVelocity = 20f;
@@ -34,10 +39,5 @@ namespace Game.Scripts.Player.Config
         [Header("LedgeClimbState")] 
         public Vector2 startOffset;
         public Vector2 endOffset;
-        
-        [Header("Check Variables")]
-        public float groundCheckRadius = 0.3f;
-        public float wallCheckDistance = 0.5f;
-        public LayerMask whatIsGround;
     }
 }

@@ -16,15 +16,15 @@ namespace Game.Scripts.Player.PlayerStates.SubStates
         public override void Enter()
         {
             base.Enter();
+
+            if (!IsAbilityUnlocked)
+            {
+                PlayerStateMachine.ChangeState(PlayerManager.InAirState);
+                return;
+            }
             
             holdPosition = PlayerManager.transform.position;
-            
             HoldPosition();
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
         }
 
         public override void LogicUpdate()
@@ -50,28 +50,8 @@ namespace Game.Scripts.Player.PlayerStates.SubStates
         {
             PlayerManager.transform.position = holdPosition;
             
-            PlayerManager.SetVelocityX(0f);
-            PlayerManager.SetVelocityY(0f);
-        }
-        
-        public override void PhysicsUpdate()
-        {
-            base.PhysicsUpdate();
-        }
-
-        public override void DoChecks()
-        {
-            base.DoChecks();
-        }
-
-        public override void AnimationTrigger()
-        {
-            base.AnimationTrigger();
-        }
-
-        public override void AnimationFinishTrigger()
-        {
-            base.AnimationFinishTrigger();
+            Core.Movement.SetVelocityX(0f);
+            Core.Movement.SetVelocityY(0f);
         }
     }
 }
