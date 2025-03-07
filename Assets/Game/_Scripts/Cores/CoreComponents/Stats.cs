@@ -1,0 +1,43 @@
+using System;
+using UnityEngine;
+
+namespace Game.Scripts.Cores.CoreComponents
+{
+    public class Stats : CoreComponent
+    {
+        public event Action OnHealthZero;
+        
+        [SerializeField] private float maxHealth;
+        private float currentHealth;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            
+            currentHealth = maxHealth;
+        }
+
+        public void DecreaseHealth(float amount)
+        {
+            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+            currentHealth -= amount;
+            
+            if (!(currentHealth <= 0)) return;
+            currentHealth = 0;
+            
+            OnHealthZero?.Invoke();
+            
+            Debug.Log("Health zero");
+        }
+        
+        
+
+        public void IncreaseHealth(float amount)
+        {
+            currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+            currentHealth += amount;
+            
+            
+        }
+    }
+}
