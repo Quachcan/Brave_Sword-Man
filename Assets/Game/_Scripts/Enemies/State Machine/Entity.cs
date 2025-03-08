@@ -1,4 +1,5 @@
-﻿using Game._Scripts.Cores.CoreComponents;
+﻿using Game._Scripts.Cores;
+using Game._Scripts.Cores.CoreComponents;
 using Game.Scripts.Cores;
 using Game.Scripts.Cores.CoreComponents;
 using Game.Scripts.Enemies.States.Data;
@@ -24,18 +25,10 @@ namespace Game._Scripts.Enemies.State_Machine
         
         protected CollisionSenses CollisionSenses => collisionSenses ?? Core.GetCoreComponent(ref collisionSenses);
         private CollisionSenses collisionSenses;
-
-        [SerializeField]
-        private Transform wallCheck;
-        [SerializeField]
-        private Transform ledgeCheck;
+        
         [SerializeField]
         private Transform playerCheck;
-        [SerializeField]
-        private Transform groundCheck;
-
-        private float currentHealth;
-        private float currentStunResistance;
+        
         private float lastDamageTime;
 
         private Vector2 velocityWorkspace;
@@ -47,9 +40,6 @@ namespace Game._Scripts.Enemies.State_Machine
         {
             Core = GetComponentInChildren<Core>();
         
-            currentHealth = entityConfig.maxHealth;
-            currentStunResistance = entityConfig.stunResistance;        
-        
             Anim = GetComponent<Animator>();
             Atsm = GetComponent<AnimationToStatemachine>();
 
@@ -59,7 +49,7 @@ namespace Game._Scripts.Enemies.State_Machine
         public virtual void Update()
         {
             Core.LogicUpdate();
-            StateMachine.currentState.LogicUpdate();
+            StateMachine.CurrentState.LogicUpdate();
 
             Anim.SetFloat(YVelocity, Movement.Rb.linearVelocity.y);
 
@@ -71,7 +61,7 @@ namespace Game._Scripts.Enemies.State_Machine
 
         public virtual void FixedUpdate()
         {
-            StateMachine.currentState.PhysicsUpdate();
+            StateMachine.CurrentState.PhysicsUpdate();
         } 
 
         public virtual bool CheckPlayerInMinAgroRange()
@@ -98,15 +88,16 @@ namespace Game._Scripts.Enemies.State_Machine
         public virtual void ResetStunResistance()
         {
             IsStunned = false;
-            currentStunResistance = entityConfig.stunResistance;
+            //currentStunResistance = entityConfig.stunResistance;
         }
 
         public virtual void OnDrawGizmos()
         {
             if (Core == null) return;
-            Gizmos.DrawLine(wallCheck.position, wallCheck.position + (Vector3)(Vector2.right * Movement.FacingDirection * entityConfig.wallCheckDistance));
-            Gizmos.DrawLine(ledgeCheck.position, ledgeCheck.position + (Vector3)(Vector2.down * entityConfig.ledgeCheckDistance));
+            Gizmos.DrawLine(CollisionSenses.wallCheck.position, CollisionSenses.wallCheck.position + (Vector3)(Vector2.right * Movement.FacingDirection * CollisionSenses.wallCheckDistance));
+            Gizmos.DrawLine(CollisionSenses.LedgeCheckVertical.position, CollisionSenses.LedgeCheckVertical.position + (Vector3)(Vector2.down * CollisionSenses.WallCheckDistance));
         
+            Gizmos.DrawWireSphere(CollisionSenses.GroundCheck.position, CollisionSenses.GroundCheckRadius);
             Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(Vector2.right * entityConfig.closeRangeActionDistance), 0.2f);
             Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(Vector2.right * entityConfig.minAgroDistance), 0.2f);
             Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(Vector2.right * entityConfig.maxAgroDistance), 0.2f);

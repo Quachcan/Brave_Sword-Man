@@ -3,6 +3,7 @@ using Game.Scripts.Interfaces;
 using Game.Scripts.Weapon.Configs;
 using System.Linq;
 using Game._Scripts.Cores.CoreComponents;
+using Game._Scripts.Interfaces;
 using Game.Scripts.Cores.CoreComponents;
 using Game.Scripts.Weapon.Structs;
 using UnityEngine;

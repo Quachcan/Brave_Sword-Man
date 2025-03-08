@@ -1,6 +1,8 @@
 ﻿using Game._Scripts.Cores.CoreComponents;
 using Game._Scripts.Enemies.State_Machine;
 using Game._Scripts.Enemies.States;
+using Game._Scripts.Enemies.States.Configs;
+using Game._Scripts.Interfaces;
 using Game.Scripts.Cores.CoreComponents;
 using Game.Scripts.Enemies.States.Data;
 using Game.Scripts.Interfaces;
@@ -18,6 +20,8 @@ namespace Game.Scripts.Enemies.States
         protected CollisionSenses CollisionSenses => collisionSenses ?? Core.GetCoreComponent(ref collisionSenses);
         private CollisionSenses collisionSenses;
 
+        private float lastAttackTime;
+
         public MeleeAttackState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, Transform attackPosition, MeleeAttackConfig stateConfig) : base(entity, stateMachine, animBoolName, attackPosition)
         {
             this.StateConfig = stateConfig;
@@ -31,6 +35,8 @@ namespace Game.Scripts.Enemies.States
         public override void Enter()
         {
             base.Enter();
+            
+            lastAttackTime = Time.time;
         }
 
         public override void Exit()

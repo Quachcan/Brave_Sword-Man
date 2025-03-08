@@ -1,8 +1,9 @@
-using Game._Scripts.Cores.CoreComponents;
+using Game._Scripts.Interfaces;
+using Game.Scripts.Cores.CoreComponents;
 using Game.Scripts.Interfaces;
 using UnityEngine;
 
-namespace Game.Scripts.Cores.CoreComponents
+namespace Game._Scripts.Cores.CoreComponents
 {
     public class Combat : CoreComponent, IDamageable, IKnockBackAble
     {

@@ -1,15 +1,16 @@
+using Game.Scripts.Cores;
 using Game.Scripts.Interfaces;
 using UnityEngine;
 
-namespace Game.Scripts.Cores.CoreComponents
+namespace Game._Scripts.Cores.CoreComponents
 {
     public class CoreComponent : MonoBehaviour, ILogicUpdate
     {
-        protected Cores.Core Core;
+        protected Core Core;
 
         protected virtual void Awake()
         {
-            Core = transform.parent.GetComponent<Cores.Core>();
+            Core = transform.parent.GetComponent<Core>();
             Core.AddComponent(this);
         }
 

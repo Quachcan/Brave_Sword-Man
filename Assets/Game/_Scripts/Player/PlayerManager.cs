@@ -1,3 +1,4 @@
+using Game._Scripts.Cores;
 using Game.Scripts.Player.Config;
 using Game.Scripts.Player.PlayerFiniteStateMachine;
 using Game.Scripts.Player.PlayerStates.SubStates;
@@ -27,7 +28,7 @@ namespace Game.Scripts.Player
         #endregion
         
         #region Components 
-        public Cores.Core Core { get; private set; }
+        public Core Core { get; private set; }
         public Animator Anim { get; private set; }
         public Rigidbody2D Rb { get; private set; }
         public BoxCollider2D MoveCollider { get; private set; }
@@ -45,7 +46,7 @@ namespace Game.Scripts.Player
 
         public void Initialize()
         {
-            Core = GetComponentInChildren<Cores.Core>();
+            Core = GetComponentInChildren<Core>();
             
             StateMachine = new PlayerStateMachine();
             

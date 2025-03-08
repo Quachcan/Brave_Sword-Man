@@ -1,4 +1,5 @@
 ﻿using Game._Scripts.Enemies.State_Machine;
+using Game._Scripts.Enemies.States.Configs;
 using Game.Scripts.Enemies.EnemySpecific.Enemy1;
 using Game.Scripts.Enemies.States.Data;
 using UnityEngine;
@@ -54,7 +55,7 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy1
         {
             base.OnDrawGizmos();
 
-            //Gizmos.DrawWireSphere(meleeAttackPosition.position, meleeAttackStateConfig.attackRadius);
+            Gizmos.DrawWireSphere(meleeAttackPosition.position, meleeAttackStateConfig.attackRadius);
         }
     }
 }

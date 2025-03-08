@@ -1,4 +1,5 @@
-﻿using Game.Scripts.Cores;
+﻿using Game._Scripts.Cores;
+using Game.Scripts.Cores;
 using UnityEngine;
 
 namespace Game._Scripts.Enemies.State_Machine

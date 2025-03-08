@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Game.Scripts.Cores.CoreComponents
+namespace Game._Scripts.Cores.CoreComponents
 {
     public class Stats : CoreComponent
     {

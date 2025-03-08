@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
-using Game.Scripts.Cores.CoreComponents;
-using UnityEngine;
 using System.Linq;
+using Game._Scripts.Cores.CoreComponents;
+using UnityEngine;
 
-namespace Game.Scripts.Cores
+namespace Game._Scripts.Cores
 {
     public class Core : MonoBehaviour
     {

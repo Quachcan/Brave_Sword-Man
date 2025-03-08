@@ -1,15 +1,15 @@
 using UnityEngine;
 
-namespace Game.Scripts.Cores.CoreComponents
+namespace Game._Scripts.Cores.CoreComponents
 {
     public class ParticleManager : CoreComponent
     {
-        private Transform particleContainer;
+        [SerializeField ]private Transform particleContainer;
 
         protected override void Awake()
         {
             base.Awake();
-
+            
             particleContainer = GameObject.FindGameObjectWithTag("ParticleContainer").transform;
         }
 

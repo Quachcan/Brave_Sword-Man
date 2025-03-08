@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Scripts.Generic
+namespace Game._Scripts.Generic
 {
     public static class GenericNotImplementedError<T>
     {

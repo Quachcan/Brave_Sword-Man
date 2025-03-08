@@ -1,3 +1,4 @@
+using Game._Scripts.Cores;
 using Game.Scripts.Player.Config;
 using Game.Scripts.Cores;
 using UnityEngine;
@@ -6,7 +7,7 @@ namespace Game.Scripts.Player.PlayerFiniteStateMachine
 {
     public class PlayerState
     {
-        protected Cores.Core Core;
+        protected Core Core;
         
         protected readonly PlayerManager PlayerManager;
         protected readonly PlayerStateMachine PlayerStateMachine;

@@ -1,4 +1,5 @@
 ﻿using Game._Scripts.Enemies.State_Machine;
+using Game._Scripts.Enemies.States.Configs;
 using Game.Scripts.Enemies.States;
 using Game.Scripts.Enemies.States.Data;
 using UnityEngine;
