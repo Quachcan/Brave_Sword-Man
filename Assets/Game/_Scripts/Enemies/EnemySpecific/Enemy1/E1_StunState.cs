@@ -1,4 +1,5 @@
 ﻿using Game._Scripts.Enemies.State_Machine;
+using Game._Scripts.Enemies.States;
 using Game.Scripts.Enemies.States.Data;
 
 namespace Game.Scripts.Enemies.EnemySpecific.Enemy1

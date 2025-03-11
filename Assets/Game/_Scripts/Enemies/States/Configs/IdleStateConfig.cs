@@ -2,7 +2,7 @@
 
 namespace Game.Scripts.Enemies.States.Data
 {
-    [CreateAssetMenu(fileName = "newIdleStateData", menuName = "Data/State Data/Idle State")]
+    [CreateAssetMenu(fileName = "newIdleStateConfig", menuName = "Config/Enemy State Config/Idle State")]
     public class IdleStateConfig : ScriptableObject
     {
         public float minIdleTime = 1f;

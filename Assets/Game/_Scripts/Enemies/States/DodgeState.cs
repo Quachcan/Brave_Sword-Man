@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Game._Scripts.Cores.CoreComponents;
 using Game._Scripts.Enemies.State_Machine;
-using Game.Scripts.Cores.CoreComponents;
+using Game._Scripts.Enemies.States.Configs;
 using Game.Scripts.Enemies.States.Data;
 using UnityEngine;
 

@@ -2,7 +2,7 @@
 
 namespace Game.Scripts.Enemies.States.Data
 {
-    [CreateAssetMenu(fileName = "newMoveStateData", menuName = "Data/State Data/Move State")]
+    [CreateAssetMenu(fileName = "newMoveStateConfig", menuName = "Config/Enemy State Config/Move State")]
     public class MoveStateConfig : ScriptableObject
     {
         public float movementSpeed = 3f;

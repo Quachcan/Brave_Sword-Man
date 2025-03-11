@@ -1,7 +1,5 @@
 ﻿using Game._Scripts.Cores;
 using Game._Scripts.Cores.CoreComponents;
-using Game.Scripts.Cores;
-using Game.Scripts.Cores.CoreComponents;
 using Game.Scripts.Enemies.States.Data;
 using UnityEngine;
 using UnityEngine.Serialization;

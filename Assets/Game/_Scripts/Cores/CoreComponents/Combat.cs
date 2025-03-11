@@ -1,5 +1,4 @@
 using Game._Scripts.Interfaces;
-using Game.Scripts.Cores.CoreComponents;
 using Game.Scripts.Interfaces;
 using UnityEngine;
 
@@ -20,13 +19,13 @@ namespace Game._Scripts.Cores.CoreComponents
         [SerializeField] private GameObject particlePrefab;
         [SerializeField] private float maxKnockBackTime = 0.2f;
         
+        private bool isKnockBackActive;
+        private float knockBackStartTime;
+        
         public override void LogicUpdate()
         {
             CheckKnockBack();
         }
-        
-        private bool isKnockBackActive;
-        private float knockBackStartTime;
         public void Damage(float damage)
         {
             Debug.Log(Core.transform.parent.name + $" Damaged: {damage}");
@@ -37,18 +36,21 @@ namespace Game._Scripts.Cores.CoreComponents
         public void KnockBack(Vector2 angle, float strength, int direction)
         {
             Movement?.SetVelocity(strength, angle, direction);
-            if (Movement is not null) Movement.CanSetVelocity = false;
+             if (Movement != null) 
+                 Movement.CanSetVelocity = false;
             isKnockBackActive = true;
             knockBackStartTime = Time.time;
+            Debug.Log(Core.transform.parent.name + $" KnockBack Active: {isKnockBackActive}");
         }
 
         private void CheckKnockBack()
         {
-            if (isKnockBackActive && ((Movement?.CurrentVelocity.y <= 0.01f) && CollisionSenses.Ground) ||
-                Time.time >= knockBackStartTime + maxKnockBackTime)
+            Debug.Log(isKnockBackActive);
+            if (isKnockBackActive && Movement.CurrentVelocity.y <= 0.1f && CollisionSenses.Ground)
             {
                 isKnockBackActive = false;
-                if (Movement is not null) Movement.CanSetVelocity = true;
+                Movement.CanSetVelocity = true;
+                Debug.Log(isKnockBackActive);   
             }
         }
     }

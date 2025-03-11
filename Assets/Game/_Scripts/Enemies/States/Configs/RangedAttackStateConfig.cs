@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 
-namespace Game.Scripts.Enemies.States.Data
+namespace Game._Scripts.Enemies.States.Configs
 {
-    [CreateAssetMenu(fileName = "newRangedAttackStateData", menuName = "Data/State Data/Ranged Attack State")]
+    [CreateAssetMenu(fileName = "newRangedAttackStateData", menuName = "Config/Enemy State Config/Ranged Attack State")]
     public class RangedAttackStateConfig : ScriptableObject
     {
-        public GameObject projectile;
+        public GameObject projectilePrefab;
         public float projectileDamage = 10f;
         public float projectileSpeed = 12f;
         public float projectileTravelDistance;
+        public float attackCoolDown = 1f;
     }
 }

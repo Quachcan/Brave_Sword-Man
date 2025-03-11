@@ -10,7 +10,7 @@ namespace Game.Scripts.Enemies.EnemySpecific.Enemy1
     {
         private _Scripts.Enemies.EnemySpecific.Enemy1.Enemy1 enemy;
         
-        public E1_PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, PlayerDetectedConfig stateData, _Scripts.Enemies.EnemySpecific.Enemy1.Enemy1 enemy) : base(entity, stateMachine, animBoolName, stateData)
+        public E1_PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, PlayerDetectedConfig stateConfig, _Scripts.Enemies.EnemySpecific.Enemy1.Enemy1 enemy) : base(entity, stateMachine, animBoolName, stateConfig)
         {
             this.enemy = enemy;
         }

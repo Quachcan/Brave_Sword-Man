@@ -1,9 +1,10 @@
 using Game._Scripts.Cores;
+using Game.Scripts.Player;
 using Game.Scripts.Player.Config;
-using Game.Scripts.Cores;
+using Game.Scripts.Player.PlayerFiniteStateMachine;
 using UnityEngine;
 
-namespace Game.Scripts.Player.PlayerFiniteStateMachine
+namespace Game._Scripts.Player.PlayerFiniteStateMachine
 {
     public class PlayerState
     {

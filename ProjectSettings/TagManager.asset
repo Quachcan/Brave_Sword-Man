@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - ParticleContainer
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -44,6 +45,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3338672431
+    locked: 0
+  - name: Enemy
+    uniqueID: 3123905571
     locked: 0
   m_RenderingLayers:
   - Default

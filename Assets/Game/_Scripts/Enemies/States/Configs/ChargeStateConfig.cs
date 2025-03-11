@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Game.Scripts.Enemies.States.Data
+namespace Game._Scripts.Enemies.States.Configs
 {
-    [CreateAssetMenu(fileName = "newChargeStateData", menuName = "Data/State Data/Charge State")]
+    [CreateAssetMenu(fileName = "newChargeStateConfig", menuName = "Config/Enemy State Config/Charge State")]
     public class ChargeStateConfig : ScriptableObject
     {
         public float chargeSpeed = 6f;

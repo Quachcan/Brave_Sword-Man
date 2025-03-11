@@ -9,7 +9,9 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy3
     {
         private Enemy3 enemy;
         
-        public E3PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, PlayerDetectedConfig stateData, Enemy3 enemy) : base(entity, stateMachine, animBoolName, stateData)
+        private bool isPlayerInMaxAgroRange;
+        
+        public E3PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, PlayerDetectedConfig stateConfig, Enemy3 enemy) : base(entity, stateMachine, animBoolName, stateConfig)
         {
             this.enemy = enemy;
         }
@@ -17,6 +19,23 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy3
         public override void LogicUpdate()
         {
             base.LogicUpdate();
+
+            if (PerformLongRangeAction)
+            {
+                StateMachine.ChangeState(enemy.RangeAttackState);
+            }
+            else if (!isPlayerInMaxAgroRange)
+            {
+                StateMachine.ChangeState(enemy.LookForPlayerState);
+            }
+            
+        }
+
+        public override void DoChecks()
+        {
+            base.DoChecks();
+
+            isPlayerInMaxAgroRange = enemy.CheckPlayerInMaxAgroRange();
         }
     }
 }

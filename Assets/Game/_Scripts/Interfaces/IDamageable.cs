@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Game.Scripts.Interfaces
+namespace Game._Scripts.Interfaces
 {
     public interface IDamageable
     {

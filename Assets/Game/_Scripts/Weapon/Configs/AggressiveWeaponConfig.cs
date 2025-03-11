@@ -1,5 +1,5 @@
 using System;
-using Game.Scripts.Weapon.Structs;
+using Game._Scripts.Weapon.Structs;
 using UnityEngine;
 
 namespace Game.Scripts.Weapon.Configs

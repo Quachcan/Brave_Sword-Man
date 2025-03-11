@@ -1,63 +1,25 @@
 ﻿using Game._Scripts.Cores.CoreComponents;
 using Game._Scripts.Enemies.State_Machine;
-using Game._Scripts.Enemies.States;
 using Game._Scripts.Enemies.States.Configs;
 using Game._Scripts.Interfaces;
-using Game.Scripts.Cores.CoreComponents;
-using Game.Scripts.Enemies.States.Data;
-using Game.Scripts.Interfaces;
 using UnityEngine;
 
-namespace Game.Scripts.Enemies.States
+namespace Game._Scripts.Enemies.States
 {
     public class MeleeAttackState : AttackState
     {
         protected MeleeAttackConfig StateConfig;
+        
+        public MeleeAttackState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, Transform attackPosition, MeleeAttackConfig stateConfig) : base(entity, stateMachine, animBoolName, attackPosition)
+        {
+            this.StateConfig = stateConfig;
+        }
 
         private Movement Movement => movement ?? Core.GetCoreComponent(ref movement);
         private Movement movement;
         
         protected CollisionSenses CollisionSenses => collisionSenses ?? Core.GetCoreComponent(ref collisionSenses);
         private CollisionSenses collisionSenses;
-
-        private float lastAttackTime;
-
-        public MeleeAttackState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, Transform attackPosition, MeleeAttackConfig stateConfig) : base(entity, stateMachine, animBoolName, attackPosition)
-        {
-            this.StateConfig = stateConfig;
-        }
-
-        public override void DoChecks()
-        {
-            base.DoChecks();
-        }
-
-        public override void Enter()
-        {
-            base.Enter();
-            
-            lastAttackTime = Time.time;
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
-        }
-
-        public override void FinishAttack()
-        {
-            base.FinishAttack();
-        }
-
-        public override void LogicUpdate()
-        {
-            base.LogicUpdate();
-        }
-
-        public override void PhysicsUpdate()
-        {
-            base.PhysicsUpdate();
-        }
 
         public override void TriggerAttack()
         {

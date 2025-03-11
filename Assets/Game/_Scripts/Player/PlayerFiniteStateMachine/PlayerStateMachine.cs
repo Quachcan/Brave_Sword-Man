@@ -1,3 +1,5 @@
+using Game._Scripts.Player.PlayerFiniteStateMachine;
+
 namespace Game.Scripts.Player.PlayerFiniteStateMachine
 {
     public class PlayerStateMachine

@@ -1,4 +1,4 @@
-using Game.Scripts.Cores;
+using Game._Scripts.Cores;
 using Game.Scripts.Interfaces;
 using UnityEngine;
 

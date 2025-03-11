@@ -2,7 +2,7 @@
 
 namespace Game.Scripts.Enemies.States.Data
 {
-    [CreateAssetMenu(fileName = "newStunStateData", menuName = "Data/State Data/Stun State")]
+    [CreateAssetMenu(fileName = "newStunStateConfig", menuName = "Config/Enemy State Config/Stun State")]
     public class StunStateConfig : ScriptableObject
     {
         public float stunTime = 3f;

@@ -1,6 +1,7 @@
 ﻿using Game._Scripts.Cores.CoreComponents;
+using Game._Scripts.Enemies.EnemySpecific.Enemy3;
 using Game._Scripts.Enemies.State_Machine;
-using Game.Scripts.Cores.CoreComponents;
+using Game._Scripts.Enemies.States.Configs;
 using UnityEngine;
 
 namespace Game._Scripts.Enemies.States
@@ -14,8 +15,13 @@ namespace Game._Scripts.Enemies.States
 
         private Movement Movement => movement ?? Core.GetCoreComponent(ref movement);
         private Movement movement;
+        
+        private Enemy3 enemy;
 
-        public AttackState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, Transform attackPosition) : base(entity, stateMachine, animBoolName)
+        protected float LastAttackTime;
+
+        public AttackState(Entity entity, FiniteStateMachine stateMachine, string animBoolName,
+            Transform attackPosition) : base(entity, stateMachine, animBoolName)
         {
             this.AttackPosition = attackPosition;
         }
@@ -45,6 +51,8 @@ namespace Game._Scripts.Enemies.States
         {
             base.LogicUpdate();
             Movement.SetVelocityX(0f);
+            
+            
         }
 
         public override void PhysicsUpdate()

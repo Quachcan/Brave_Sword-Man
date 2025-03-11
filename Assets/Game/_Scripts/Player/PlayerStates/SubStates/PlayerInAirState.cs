@@ -1,5 +1,5 @@
 using Game._Scripts.Cores.CoreComponents;
-using Game.Scripts.Cores.CoreComponents;
+using Game._Scripts.Player.PlayerFiniteStateMachine;
 using Game.Scripts.Player.Config;
 using Game.Scripts.Player.PlayerFiniteStateMachine;
 using UnityEngine;

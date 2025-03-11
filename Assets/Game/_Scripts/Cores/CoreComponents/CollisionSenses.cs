@@ -1,9 +1,7 @@
-using Game._Scripts.Cores.CoreComponents;
 using Game._Scripts.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Game.Scripts.Cores.CoreComponents
+namespace Game._Scripts.Cores.CoreComponents
 {
     public class CollisionSenses : CoreComponent
     {

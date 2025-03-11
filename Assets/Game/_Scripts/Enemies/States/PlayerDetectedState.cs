@@ -1,6 +1,5 @@
 ﻿using Game._Scripts.Cores.CoreComponents;
 using Game._Scripts.Enemies.State_Machine;
-using Game.Scripts.Cores.CoreComponents;
 using Game.Scripts.Enemies.States.Data;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ namespace Game._Scripts.Enemies.States
 {
     public class PlayerDetectedState : State
     {
-        protected PlayerDetectedConfig stateData;
+        protected PlayerDetectedConfig StateConfig;
 
         protected Movement Movement => movement ?? Core.GetCoreComponent(ref movement);
         private Movement movement;
@@ -22,9 +21,9 @@ namespace Game._Scripts.Enemies.States
         protected bool PerformCloseRangeAction;
         protected bool IsDetectingLedge;
 
-        public PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, PlayerDetectedConfig stateData) : base(entity, stateMachine, animBoolName)
+        public PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, PlayerDetectedConfig stateConfig) : base(entity, stateMachine, animBoolName)
         {
-            this.stateData = stateData;
+            this.StateConfig = stateConfig;
         }
 
         public override void DoChecks()
@@ -56,7 +55,7 @@ namespace Game._Scripts.Enemies.States
 
             Movement?.SetVelocityX(0f);
 
-            if (Time.time >= StartTime + stateData.longRangeActionTime)
+            if (Time.time >= StartTime + StateConfig.longRangeActionTime)
             {
                 PerformLongRangeAction = true;
             }

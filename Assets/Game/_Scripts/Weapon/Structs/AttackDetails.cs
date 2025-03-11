@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Scripts.Weapon.Structs
+namespace Game._Scripts.Weapon.Structs
 {
     [System.Serializable]
     public struct WeaponAttackDetails

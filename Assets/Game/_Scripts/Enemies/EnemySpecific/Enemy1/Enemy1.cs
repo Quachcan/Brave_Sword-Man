@@ -13,7 +13,7 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy1
         public E1_PlayerDetectedState PlayerDetectedState { get; private set; }
         public E1_ChargeState ChargeState { get; private set; }
         public E1_LookForPlayerState LookForPlayerState { get; private set; }
-        public E1_MeleeAttackState MeleeAttackState { get; private set; }
+        public E1MeleeAttackState MeleeAttackState { get; private set; }
         public E1_StunState StunState { get; private set; }
         public E1_DeadState DeadState { get; private set; }
 
@@ -39,7 +39,7 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy1
             PlayerDetectedState = new E1_PlayerDetectedState(this, StateMachine, "playerDetected", playerDetectedConfig, this);
             ChargeState = new E1_ChargeState(this, StateMachine, "charge", chargeStateConfig, this);
             LookForPlayerState = new E1_LookForPlayerState(this, StateMachine, "lookForPlayer", lookForPlayerStateConfig, this);
-            MeleeAttackState = new E1_MeleeAttackState(this, StateMachine, "meleeAttack", meleeAttackPosition, meleeAttackStateConfig, this);
+            MeleeAttackState = new E1MeleeAttackState(this, StateMachine, "meleeAttack", meleeAttackPosition, meleeAttackStateConfig, this);
             StunState = new E1_StunState(this, StateMachine, "stun", stunStateConfig, this);
             DeadState = new E1_DeadState(this, StateMachine, "dead", deadStateConfig, this);
 

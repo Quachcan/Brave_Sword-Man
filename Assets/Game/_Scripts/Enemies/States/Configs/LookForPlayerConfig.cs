@@ -2,7 +2,7 @@
 
 namespace Game.Scripts.Enemies.States.Data
 {
-    [CreateAssetMenu(fileName = "newLookForPlayerStateData", menuName = "Data/State Data/Look For Player State")]
+    [CreateAssetMenu(fileName = "newLookForPlayerStateConfig", menuName = "Config/Enemy State Config/Look For Player State")]
     public class LookForPlayerConfig : ScriptableObject
     {
         public int amountOfTurns = 2;

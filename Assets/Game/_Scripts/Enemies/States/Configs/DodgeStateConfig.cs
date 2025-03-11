@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Game.Scripts.Enemies.States.Data
+namespace Game._Scripts.Enemies.States.Configs
 {
-    [CreateAssetMenu(fileName = "newDodgeStateData", menuName = "Data/State Data/Dodge State")]
+    [CreateAssetMenu(fileName = "newDodgeStateConfig", menuName = "Config/Enemy State Config/Dodge State")]
     public class DodgeStateConfig : ScriptableObject
     {
         public float dodgeSpeed = 10f;

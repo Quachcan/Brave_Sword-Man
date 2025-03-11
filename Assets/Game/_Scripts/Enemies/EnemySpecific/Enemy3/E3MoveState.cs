@@ -18,7 +18,11 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy3
             base.LogicUpdate();
 
 
-            if (IsDetectingWall || !IsDetectingLedge)
+            if (IsPlayerInMinAgroRange)
+            {
+                StateMachine.ChangeState(enemy.PlayerDetectedState);
+            }
+            else if (IsDetectingWall || !IsDetectingLedge)
             {
                 enemy.IdleState.SetFlipAfterIdle(true);
                 StateMachine.ChangeState(enemy.IdleState);

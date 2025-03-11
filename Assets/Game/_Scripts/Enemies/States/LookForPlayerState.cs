@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Game._Scripts.Cores.CoreComponents;
 using Game._Scripts.Enemies.State_Machine;
-using Game.Scripts.Cores.CoreComponents;
 using Game.Scripts.Enemies.States.Data;
 using UnityEngine;
 
@@ -18,6 +17,7 @@ public class LookForPlayerState : State
     
     protected bool TurnImmediately;
     protected bool IsPlayerInMinAgroRange;
+    protected bool IsPlayerInMaxAgroRange;
     protected bool IsAllTurnsDone;
     protected bool IsAllTurnsTimeDone;
 
@@ -35,6 +35,7 @@ public class LookForPlayerState : State
         base.DoChecks();
 
         IsPlayerInMinAgroRange = Entity.CheckPlayerInMinAgroRange();
+        IsPlayerInMaxAgroRange = Entity.CheckPlayerInMaxAgroRange();
     }
 
     public override void Enter()
@@ -85,11 +86,7 @@ public class LookForPlayerState : State
             IsAllTurnsTimeDone = true;
         }
     }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
+    
 
     public void SetTurnImmediately(bool flip)
     {

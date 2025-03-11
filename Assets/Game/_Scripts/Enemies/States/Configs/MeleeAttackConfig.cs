@@ -2,7 +2,7 @@
 
 namespace Game._Scripts.Enemies.States.Configs
 {
-    [CreateAssetMenu(fileName = "newMeleeAttackStateData", menuName = "Data/State Data/Melee Attack State")]
+    [CreateAssetMenu(fileName = "newMeleeAttackStateConfig", menuName = "Config/Enemy State Config/Melee Attack State")]
     public class MeleeAttackConfig : ScriptableObject
     {
         public float attackRadius = 0.5f;
