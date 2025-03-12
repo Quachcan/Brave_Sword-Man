@@ -49,5 +49,17 @@ TagManager:
   - name: Enemy
     uniqueID: 3123905571
     locked: 0
+  - name: Background
+    uniqueID: 2304227105
+    locked: 0
+  - name: Ground
+    uniqueID: 50383327
+    locked: 0
+  - name: Building and Prop
+    uniqueID: 1034203991
+    locked: 0
+  - name: Environment
+    uniqueID: 3750948639
+    locked: 0
   m_RenderingLayers:
   - Default

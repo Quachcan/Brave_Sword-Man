@@ -9,9 +9,10 @@ namespace Game._Scripts.Enemies.State_Machine
     public class Entity : MonoBehaviour
     {
         private static readonly int YVelocity = Animator.StringToHash("yVelocity");
+
         public FiniteStateMachine StateMachine;
 
-        [FormerlySerializedAs("entityConfigData")] public EntityConfig entityConfig;
+        public EntityConfig entityConfig;
 
         public Animator Anim { get; private set; }    
         public AnimationToStatemachine Atsm { get; private set; }

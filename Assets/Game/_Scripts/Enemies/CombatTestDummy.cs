@@ -1,3 +1,4 @@
+using Game._Scripts.Cores.CoreComponents;
 using Game._Scripts.Interfaces;
 using Game.Scripts.Interfaces;
 using UnityEngine;
@@ -23,5 +24,6 @@ namespace Game.Scripts.Enemies
             //anim.SetTrigger(Hit);
             Destroy(gameObject);
         }
+
     }
 }

@@ -36,22 +36,21 @@ namespace Game._Scripts.Cores.CoreComponents
         public void KnockBack(Vector2 angle, float strength, int direction)
         {
             Movement?.SetVelocity(strength, angle, direction);
-             if (Movement != null) 
+            if (Movement != null)                   
                  Movement.CanSetVelocity = false;
             isKnockBackActive = true;
+            //Debug.Log(Core.transform.parent.name + $" KnockBack Active: {isKnockBackActive}");
             knockBackStartTime = Time.time;
-            Debug.Log(Core.transform.parent.name + $" KnockBack Active: {isKnockBackActive}");
-        }
+        }   
 
         private void CheckKnockBack()
         {
-            Debug.Log(isKnockBackActive);
+            //Debug.Log(isKnockBackActive);
             if (isKnockBackActive && Movement.CurrentVelocity.y <= 0.1f && CollisionSenses.Ground)
             {
                 isKnockBackActive = false;
                 Movement.CanSetVelocity = true;
-                Debug.Log(isKnockBackActive);   
             }
         }
-    }
+    }   
 }

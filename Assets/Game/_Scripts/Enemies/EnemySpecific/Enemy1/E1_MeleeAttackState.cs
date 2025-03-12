@@ -11,13 +11,11 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy1
     {
         private Enemy1 enemy;
 
-        private MeleeAttackConfig stateConfig;
         
 
         public E1MeleeAttackState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, Transform attackPosition, MeleeAttackConfig stateConfig, Enemy1 enemy) : base(entity, stateMachine, animBoolName, attackPosition, stateConfig)
         {
             this.enemy = enemy;
-            this.stateConfig = stateConfig;
         }
 
         public override void Enter()

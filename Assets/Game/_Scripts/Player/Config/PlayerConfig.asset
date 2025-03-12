@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementVelocity: 10
   crouchMovementVelocity: 5
-  crouchColliderHeight: 1.7
+  crouchColliderHeight: 1.4
   standColliderHeight: 2.4
   jumpVelocity: 20
   amountOfJumps: 2
