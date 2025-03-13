@@ -60,9 +60,10 @@ namespace Game._Scripts.ProjectTiles
                     if (targetHit != null)
                     {
                         targetHit.Damage(damage);
+                        Destroy(gameObject);
                     }
-                    Destroy(gameObject);
                 }
+                
 
                 if (groundHit)
                 {

@@ -16,8 +16,8 @@ MonoBehaviour:
   crouchMovementVelocity: 5
   crouchColliderHeight: 1.4
   standColliderHeight: 2.4
-  jumpVelocity: 20
-  amountOfJumps: 2
+  jumpVelocity: 25
+  amountOfJumps: 1
   variableJumpHeightMultiplier: 0.5
   dashCooldown: 1.5
   dodgeDuration: 0.3
