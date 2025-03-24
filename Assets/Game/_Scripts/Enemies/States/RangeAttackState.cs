@@ -24,18 +24,12 @@ namespace Game._Scripts.Enemies.States
         public override void Enter()
         {
             base.Enter();
-            
-            //IsAttackOver = false;
+
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-
-            // if (Time.time < lastAttackTime + StateConfig.attackCoolDown)
-            // {
-            //     IsAttackOver = true;
-            // }
         }
 
         public override void TriggerAttack()
@@ -45,7 +39,7 @@ namespace Game._Scripts.Enemies.States
             
             Projectile = Object.Instantiate(StateConfig.projectilePrefab, AttackPosition.position, AttackPosition.rotation); 
             ProjectileScript = Projectile.GetComponent<Projectile>();
-            ProjectileScript.FireProjectile(StateConfig.projectileSpeed, StateConfig.projectileTravelDistance, StateConfig.projectileDamage);
+            ProjectileScript.FireProjectile(StateConfig.projectileSpeed, StateConfig.projectileTravelDistance, StateConfig.projectileDamage, StateConfig.projectileLifeTime);
         }
     }
 }

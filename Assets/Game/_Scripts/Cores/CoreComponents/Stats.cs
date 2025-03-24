@@ -8,7 +8,7 @@ namespace Game._Scripts.Cores.CoreComponents
         public event Action OnHealthZero;
         
         [SerializeField] private float maxHealth;
-        private float currentHealth;
+        [SerializeField] private float currentHealth;
 
         protected override void Awake()
         {
@@ -22,7 +22,7 @@ namespace Game._Scripts.Cores.CoreComponents
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
             currentHealth -= amount;
             
-            if (!(currentHealth <= 0)) return;
+            if (currentHealth > 0) return;
             currentHealth = 0;
             
             OnHealthZero?.Invoke();
@@ -30,14 +30,10 @@ namespace Game._Scripts.Cores.CoreComponents
             Debug.Log("Health zero");
         }
         
-        
-
         public void IncreaseHealth(float amount)
         {
             currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
             currentHealth += amount;
-            
-            
         }
     }
 }

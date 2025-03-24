@@ -51,8 +51,6 @@ namespace Game._Scripts.Enemies.States
         {
             base.LogicUpdate();
             Movement.SetVelocityX(0f);
-            
-            
         }
 
         public override void PhysicsUpdate()

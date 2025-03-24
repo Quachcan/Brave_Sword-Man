@@ -10,12 +10,15 @@ namespace Game._Scripts.ProjectTiles
         private float travelDistance;
         private float damage;
         private float xStartPos;
+        private float spawnTime;
+        private float lifeTime;
         
         [SerializeField] private float gravity;
         [SerializeField] private float damageRadius;
 
         private bool isGravityOn;
-        private bool hasHitGrounded; 
+        private bool hasHitGrounded;
+        private bool hasHitTarget;
         
         private Rigidbody2D rb;
         
@@ -27,6 +30,7 @@ namespace Game._Scripts.ProjectTiles
         {
             rb = GetComponent<Rigidbody2D>();
             
+            spawnTime = Time.time;
             rb.gravityScale = 0.0f;
             rb.linearVelocity = transform.right * speed;
             
@@ -37,54 +41,57 @@ namespace Game._Scripts.ProjectTiles
 
         private void Update()
         {
-            if (!hasHitGrounded)
+            if (Time.time > spawnTime + lifeTime)
             {
-                if (isGravityOn)
-                {
-                    float angle = Mathf.Atan2(rb.linearVelocity.y, rb.linearVelocity.x) * Mathf.Rad2Deg;
-                    transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                }
+                Destroy(gameObject);
+                return;
             }
+
+            if (hasHitGrounded) return;
+            if (!isGravityOn) return;
+            float angle = Mathf.Atan2(rb.linearVelocity.y, rb.linearVelocity.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
         private void FixedUpdate()
         {
-            if (!hasHitGrounded)
+            if (hasHitTarget) return;
+            Collider2D damageHit = Physics2D.OverlapCircle(damagePosition.position, damageRadius, whatIsPlayer);
+            Collider2D groundHit = Physics2D.OverlapCircle(damagePosition.position, damageRadius, whatIsGround);
+
+            //Debug.Log("GroundHit: " + (groundHit ? groundHit.gameObject.name : "none"));
+
+                
+            if (damageHit)
             {
-                Collider2D damageHit = Physics2D.OverlapCircle(damagePosition.position, damageRadius, whatIsPlayer);
-                Collider2D groundHit = Physics2D.OverlapCircle(damagePosition.position, damageRadius, whatIsGround);
+                Combat targetHit = damageHit.GetComponent<Combat>();
+                targetHit?.Damage(damage);
+                hasHitTarget = true;
+                Destroy(gameObject);
+                return;
+            }
 
-                if (damageHit)
-                {
-                    Combat targetHit = damageHit.GetComponent<Combat>();
-                    if (targetHit != null)
-                    {
-                        targetHit.Damage(damage);
-                        Destroy(gameObject);
-                    }
-                }
+            if (groundHit)
+            {
+                isGravityOn = true;
+                rb.gravityScale = 0f;
+                rb.linearVelocity = Vector2.zero;
+                Destroy(gameObject);
+            }
                 
-
-                if (groundHit)
-                {
-                    isGravityOn = true;
-                    rb.gravityScale = 0f;
-                    rb.linearVelocity = Vector2.zero;
-                }
-                
-                if (Mathf.Abs(xStartPos - transform.position.x) >= travelDistance && !isGravityOn)
-                {
-                    isGravityOn = true;
-                    rb.gravityScale = gravity;
-                }   
+            else if (Mathf.Abs(xStartPos - transform.position.x) >= travelDistance && !isGravityOn)
+            {
+                isGravityOn = true;
+                rb.gravityScale = gravity;
             }
         }
 
-        public void FireProjectile(float speed, float distance, float damage)
+        public void FireProjectile(float speed, float distance, float damage, float lifetime)
         {
             this.speed = speed;
             this.travelDistance = distance;
             this.damage = damage;
+            this.lifeTime = lifetime;
         }
 
         private void OnDrawGizmos()

@@ -90,16 +90,11 @@ namespace Game._Scripts.Enemies.State_Machine
             //currentStunResistance = entityConfig.stunResistance;
         }
 
-        public virtual void OnDrawGizmos()
-        {
-            if (Core == null) return;
-            Gizmos.DrawLine(CollisionSenses.wallCheck.position, CollisionSenses.wallCheck.position + (Vector3)(Vector2.right * Movement.FacingDirection * CollisionSenses.wallCheckDistance));
-            Gizmos.DrawLine(CollisionSenses.LedgeCheckVertical.position, CollisionSenses.LedgeCheckVertical.position + (Vector3)(Vector2.down * CollisionSenses.WallCheckDistance));
-        
-            Gizmos.DrawWireSphere(CollisionSenses.GroundCheck.position, CollisionSenses.GroundCheckRadius);
-            Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(Vector2.right * entityConfig.closeRangeActionDistance), 0.2f);
-            Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(Vector2.right * entityConfig.minAgroDistance), 0.2f);
-            Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(Vector2.right * entityConfig.maxAgroDistance), 0.2f);
-        }
+        //public virtual void OnDrawGizmos()
+        //{
+        //    Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(Vector2.right * entityConfig.closeRangeActionDistance), 0.2f);
+        //    Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(Vector2.right * entityConfig.minAgroDistance), 0.2f);
+        //    Gizmos.DrawWireSphere(playerCheck.position + (Vector3)(Vector2.right * entityConfig.maxAgroDistance), 0.2f);
+        //}
     }
 }

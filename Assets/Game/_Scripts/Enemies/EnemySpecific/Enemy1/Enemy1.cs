@@ -50,12 +50,5 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy1
         {
             StateMachine.Initialize(MoveState);        
         }
-
-        public override void OnDrawGizmos()
-        {
-            base.OnDrawGizmos();
-
-            Gizmos.DrawWireSphere(meleeAttackPosition.position, meleeAttackStateConfig.attackRadius);
-        }
     }
 }

@@ -28,8 +28,8 @@ namespace Game._Scripts.Cores.CoreComponents
         }
         public void Damage(float damage)
         {
-            Debug.Log(Core.transform.parent.name + $" Damaged: {damage}");
             Stats?.DecreaseHealth(damage);
+            Debug.Log(Core.transform.parent.name + $" Damaged: {damage}");
             ParticleManager?.StartParticleWithRandomRotation(particlePrefab);
         }
 

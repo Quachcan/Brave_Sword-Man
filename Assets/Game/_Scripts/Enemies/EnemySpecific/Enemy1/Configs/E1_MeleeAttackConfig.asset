@@ -9,8 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1154f33c8d7140440a5466fb10a4585a, type: 3}
-  m_Name: E1_LookForPlayerData
+  m_Script: {fileID: 11500000, guid: 763ac820ee732cf4bbbd226c2ac6513c, type: 3}
+  m_Name: E1_MeleeAttackConfig
   m_EditorClassIdentifier: 
-  amountOfTurns: 2
-  timeBetweenTurns: 0.75
+  attackRadius: 0.75
+  attackDamage: 10
+  attackCoolDown: 10
+  knockBackAngle: {x: 1, y: 1}
+  knockBackStrength: 25
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 64

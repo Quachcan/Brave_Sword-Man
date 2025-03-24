@@ -67,5 +67,8 @@ TagManager:
   - name: Player
     uniqueID: 3338672431
     locked: 0
+  - name: Particle
+    uniqueID: 2622653083
+    locked: 0
   m_RenderingLayers:
   - Default

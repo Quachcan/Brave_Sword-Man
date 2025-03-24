@@ -17,15 +17,9 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy3
             this.enemy = enemy;
         }
 
-        public override void Enter()
-        {
-            base.Enter();
-        }
-
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            
             
             if (IsAnimationFinished)
             {
@@ -38,13 +32,11 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy3
                     StateMachine.ChangeState(enemy.LookForPlayerState);
                 }
             }
-            
         }
 
         public override void DoChecks()
         {
             base.DoChecks();
-
             IsPlayerInMinAgroRange = Entity.CheckPlayerInMaxAgroRange();
         }
     }

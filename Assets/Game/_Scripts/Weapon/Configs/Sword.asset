@@ -16,10 +16,10 @@ MonoBehaviour:
   - attackName: First Slash
     movementSpeed: 2
     damageAmount: 10
-    knockBackStrength: 10
+    knockBackStrength: 15
     knockBackAngle: {x: 1, y: 1}
   - attackName: Second Slash
     movementSpeed: 4
     damageAmount: 15
-    knockBackStrength: 15
+    knockBackStrength: 20
     knockBackAngle: {x: 1, y: 1}

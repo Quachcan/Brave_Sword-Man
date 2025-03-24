@@ -1,4 +1,4 @@
-using Game._Scripts.Generic;
+﻿using Game._Scripts.Generic;
 using UnityEngine;
 
 namespace Game._Scripts.Cores.CoreComponents
@@ -68,5 +68,6 @@ namespace Game._Scripts.Cores.CoreComponents
         public bool WallBack => Physics2D.Raycast(WallCheck.position, Vector2.right * -Movement.FacingDirection, wallCheckDistance, whatIsGround);
 
         #endregion
+
     }
 }
