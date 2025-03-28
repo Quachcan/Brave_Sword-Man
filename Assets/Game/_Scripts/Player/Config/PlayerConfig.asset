@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46dc5c0f6523d47938ddd749d168b454, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  movementVelocity: 10
-  crouchMovementVelocity: 5
-  crouchColliderHeight: 1.4
-  standColliderHeight: 2.4
-  jumpVelocity: 25
+  movementVelocity: 11
+  crouchMovementVelocity: 3
+  crouchColliderHeight: 1
+  standColliderHeight: 1.8
+  jumpVelocity: 31
   amountOfJumps: 1
   variableJumpHeightMultiplier: 0.5
   dashCooldown: 1.5
   dodgeDuration: 0.3
-  dodgeVelocity: 30
+  dodgeVelocity: 25
   drag: 0
   wallJumpVelocity: 25
   wallJumpTime: 0.4

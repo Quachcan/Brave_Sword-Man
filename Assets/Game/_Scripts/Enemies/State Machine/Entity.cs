@@ -61,7 +61,7 @@ namespace Game._Scripts.Enemies.State_Machine
         public virtual void FixedUpdate()
         {
             StateMachine.CurrentState.PhysicsUpdate();
-        } 
+        }  
 
         public virtual bool CheckPlayerInMinAgroRange()
         {
@@ -78,11 +78,11 @@ namespace Game._Scripts.Enemies.State_Machine
             return Physics2D.Raycast(playerCheck.position, transform.right, entityConfig.closeRangeActionDistance, entityConfig.whatIsPlayer);
         }
 
-        public virtual void DamageHop(float velocity)
-        {
-            velocityWorkspace.Set(Movement.Rb.linearVelocity.x, velocity);
-            Movement.Rb.linearVelocity = velocityWorkspace;
-        }
+        // public virtual void DamageHop(float velocity)
+        // {
+        //     velocityWorkspace.Set(Movement.Rb.linearVelocity.x, velocity);
+        //     Movement.Rb.linearVelocity = velocityWorkspace;
+        // }
 
         public virtual void ResetStunResistance()
         {

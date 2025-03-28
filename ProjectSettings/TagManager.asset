@@ -18,7 +18,7 @@ TagManager:
   - Weapon
   - Damageable
   - NPC
-  - 
+  - Traps
   - 
   - 
   - 
@@ -57,6 +57,12 @@ TagManager:
     locked: 0
   - name: Environment
     uniqueID: 3750948639
+    locked: 0
+  - name: Traps
+    uniqueID: 2859081097
+    locked: 0
+  - name: Save Point
+    uniqueID: 1857346197
     locked: 0
   - name: Enemy
     uniqueID: 3123905571

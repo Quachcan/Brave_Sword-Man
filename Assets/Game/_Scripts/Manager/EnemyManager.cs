@@ -1,18 +1,44 @@
-using System.Collections;
 using System.Collections.Generic;
+using Game._Scripts.Enemies.State_Machine;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+namespace Game._Scripts.Manager
 {
-    // Start is called before the first frame update
-    void Start()
+    public class EnemyManager : MonoBehaviour
     {
+        public static EnemyManager Instance { get;  set; }
         
-    }
+        [SerializeField] private List<Entity> enemies = new List<Entity>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void RegisterEnemy(Entity enemy)
+        {
+            if (!enemies.Contains(enemy))
+            {
+                enemies.Add(enemy);
+                Debug.Log($"Resgistered enemey: {enemy.name}");
+            }
+        }
+
+        public void UnregisterEnemy(Entity enemy)
+        {
+            if (enemies.Contains(enemy))
+            {
+                enemies.Remove(enemy);
+            }
+        }
+
+        public void RespawnEnemy()
+        {
+            Debug.Log($"Respawning enemey");
+            Debug.Log(enemies.Count);
+            foreach (var enemy in enemies)
+            {
+                if (!enemy.gameObject.activeSelf)
+                {
+                    enemy.gameObject.SetActive(true);
+                    Debug.Log("Respawned enemy: " + enemy.gameObject.name);
+                }
+            }
+        }
     }
 }

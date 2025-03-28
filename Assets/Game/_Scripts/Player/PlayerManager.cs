@@ -1,10 +1,11 @@
 using Game._Scripts.Cores;
+using Game.Scripts.Player;
 using Game.Scripts.Player.Config;
 using Game.Scripts.Player.PlayerFiniteStateMachine;
 using Game.Scripts.Player.PlayerStates.SubStates;
 using UnityEngine;
 
-namespace Game.Scripts.Player
+namespace Game._Scripts.Player
 {
     public class PlayerManager : MonoBehaviour
     {

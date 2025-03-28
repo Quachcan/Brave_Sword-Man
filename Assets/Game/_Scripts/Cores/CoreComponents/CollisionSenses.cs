@@ -48,6 +48,7 @@ namespace Game._Scripts.Cores.CoreComponents
         
         [SerializeField] public float groundCheckRadius;
         [SerializeField] public float wallCheckDistance;
+        [SerializeField] public float ceilingCheckRadius;
         
         [SerializeField] private LayerMask whatIsGround;
         #endregion
@@ -57,7 +58,7 @@ namespace Game._Scripts.Cores.CoreComponents
 
         public bool Ground => Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, whatIsGround);
 
-        public bool Ceiling => Physics2D.OverlapCircle(CeilingCheck.position, groundCheckRadius, whatIsGround);
+        public bool Ceiling => Physics2D.OverlapCircle(CeilingCheck.position, ceilingCheckRadius, whatIsGround);
 
         public bool WallFront => Physics2D.Raycast(WallCheck.position, Vector2.right * Movement.FacingDirection, wallCheckDistance, whatIsGround);
 
@@ -69,5 +70,55 @@ namespace Game._Scripts.Cores.CoreComponents
 
         #endregion
 
+        #region Gizmos
+        // private void OnDrawGizmos()
+        // {
+        //     if (GroundCheck != null)
+        //     {
+        //         Gizmos.color = Color.green;
+        //         Gizmos.DrawWireSphere(GroundCheck.position, groundCheckRadius);
+        //     }
+        //     
+        //     if (CeilingCheck != null)
+        //     {
+        //         Gizmos.color = Color.blue;
+        //         Gizmos.DrawWireSphere(CeilingCheck.position, ceilingCheckRadius);
+        //     }
+        //
+        //     if (wallCheck != null && Movement != null)
+        //     {
+        //         Gizmos.color = Color.red;
+        //         Vector3 start = wallCheck.position;
+        //         Vector3 end = start + (Vector3)(Vector2.right * Movement.FacingDirection * wallCheckDistance);
+        //         Gizmos.DrawLine(start, end);
+        //     }
+        //     
+        //     if (ledgeCheckHorizontal != null && Movement != null)
+        //     {
+        //         Gizmos.color = Color.yellow;
+        //         Vector3 start = ledgeCheckHorizontal.position;
+        //         Vector3 end = start + (Vector3)(Vector2.right * Movement.FacingDirection * wallCheckDistance);
+        //         Gizmos.DrawLine(start, end);
+        //     }
+        //     
+        //     if (ledgeCheckVertical != null)
+        //     {
+        //         Gizmos.color = Color.magenta;
+        //         Vector3 start = ledgeCheckVertical.position;
+        //         Vector3 end = start + (Vector3)(Vector2.down * wallCheckDistance);
+        //         Gizmos.DrawLine(start, end);
+        //     }
+        //     
+        //     if (wallCheck != null && Movement != null)
+        //     {
+        //         Gizmos.color = Color.cyan;
+        //         Vector3 start = wallCheck.position;
+        //         Vector3 end = start + (Vector3)(Vector2.right * -Movement.FacingDirection * wallCheckDistance);
+        //         Gizmos.DrawLine(start, end);
+        //     }
+        // }
+        
+        #endregion
+        
     }
 }

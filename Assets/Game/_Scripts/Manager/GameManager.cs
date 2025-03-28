@@ -1,7 +1,8 @@
+using Game._Scripts.Player;
 using Game.Scripts.Player;
 using UnityEngine;
 
-namespace Game.Script.Manager
+namespace Game._Scripts.Manager
 {
     public class GameManager : MonoBehaviour
     {
@@ -13,7 +14,8 @@ namespace Game.Script.Manager
         [Header("Managers")]
         public UIManager uiManager;
         public PlayerManager playerManager;
-        public EnemyManager enemyManager;
+        [SerializeField] private EnemyManager enemyManagerPrefab;
+        [SerializeField] private EnemyManager enemyManager;
         public AudioManager audioManager;
         public MapManager mapManager;
         public SceneLoader sceneLoader;
@@ -22,6 +24,7 @@ namespace Game.Script.Manager
 
         private void Awake()
         {
+            Debug.Log("GameManager Awake");
             if (Instance == null)
             {
                 Instance = this;
@@ -38,6 +41,18 @@ namespace Game.Script.Manager
 
         private void InitializeAllScripts()
         {
+            Debug.Log("Initialized all Scripts");
+            
+            if (enemyManager == null && enemyManagerPrefab != null)
+            {
+                enemyManager = Instantiate(enemyManagerPrefab, transform);
+                Debug.Log("EnemyManager instantiated: " + enemyManager.name);
+            }
+            else
+            {
+                Debug.Log("Not Initialized");
+            }
+            EnemyManager.Instance = enemyManager;
             playerManager.Initialize();
         }
 

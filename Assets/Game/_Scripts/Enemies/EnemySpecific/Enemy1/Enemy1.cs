@@ -1,5 +1,6 @@
 ﻿using Game._Scripts.Enemies.State_Machine;
 using Game._Scripts.Enemies.States.Configs;
+using Game._Scripts.Manager;
 using Game.Scripts.Enemies.EnemySpecific.Enemy1;
 using Game.Scripts.Enemies.States.Data;
 using UnityEngine;
@@ -34,6 +35,8 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy1
         {
             base.Awake();
 
+            EnemyManager.Instance.RegisterEnemy(this);
+            
             MoveState = new E1_MoveState(this, StateMachine, "move", moveStateConfig, this);
             IdleState = new E1_IdleState(this, StateMachine, "idle", idleStateConfig, this);
             PlayerDetectedState = new E1_PlayerDetectedState(this, StateMachine, "playerDetected", playerDetectedConfig, this);
@@ -42,8 +45,6 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy1
             MeleeAttackState = new E1MeleeAttackState(this, StateMachine, "meleeAttack", meleeAttackPosition, meleeAttackStateConfig, this);
             StunState = new E1_StunState(this, StateMachine, "stun", stunStateConfig, this);
             DeadState = new E1_DeadState(this, StateMachine, "dead", deadStateConfig, this);
-
-       
         }
 
         private void Start()

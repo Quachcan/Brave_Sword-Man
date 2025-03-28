@@ -1,3 +1,4 @@
+using Game._Scripts.Player;
 using Game.Scripts.Player.Config;
 using Game.Scripts.Player.PlayerFiniteStateMachine;
 using Game.Scripts.Player.PlayerStates.SuperStates;

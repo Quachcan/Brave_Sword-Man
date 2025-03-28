@@ -1,4 +1,5 @@
 using Game._Scripts.Cores.CoreComponents;
+using Game._Scripts.Player;
 using Game._Scripts.Player.PlayerFiniteStateMachine;
 using Game.Scripts.Player.Config;
 using Game.Scripts.Player.PlayerFiniteStateMachine;
@@ -52,11 +53,11 @@ namespace Game.Scripts.Player.PlayerStates.SubStates
             {
                 PlayerStateMachine.ChangeState(PlayerManager.PrimaryAttackState);
             }
-            else if (PlayerManager.InputHandler.AttackInputs[(int)CombatInputs.Secondary])
-            {
-                PlayerStateMachine.ChangeState(PlayerManager.SecondaryAttackState);
-            }
-            else if (isGrounded && Movement.CurrentVelocity.y <= 0f)
+            // else if (PlayerManager.InputHandler.AttackInputs[(int)CombatInputs.Secondary])
+            // {
+            //     PlayerStateMachine.ChangeState(PlayerManager.SecondaryAttackState);
+            // }
+            else if (isGrounded && Movement.CurrentVelocity.y <= 0.01f)
             {
                 PlayerStateMachine.ChangeState(PlayerManager.LandState);
             }

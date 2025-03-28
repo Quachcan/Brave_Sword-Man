@@ -1,5 +1,6 @@
 using Game._Scripts.Enemies.State_Machine;
 using Game._Scripts.Enemies.States.Configs;
+using Game._Scripts.Manager;
 using Game.Scripts.Enemies.States.Data;
 using UnityEngine;
 
@@ -26,6 +27,8 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy3
         {
             base.Awake();   
             
+            EnemyManager.Instance.RegisterEnemy(this);
+            
             IdleState = new E3IdleState(this, StateMachine, "idle",  idleStateConfig, this);
             MoveState = new E3MoveState(this, StateMachine, "move", moveStateConfig, this);
             PlayerDetectedState = new E3PlayerDetectedState(this, StateMachine,  "playerDetect", playerDetectedConfig, this);
@@ -33,6 +36,10 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy3
             RangeAttackState = new E3RangeAttackState(this, StateMachine, "rangeAttack", rangeAttackPosition,
                 rangedAttackStateConfig, this);
             
+        }
+
+        private void Start()
+        {
             StateMachine.Initialize(MoveState);
         }
     }
