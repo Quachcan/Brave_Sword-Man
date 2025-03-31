@@ -10,7 +10,7 @@ namespace Game._Scripts.Enemies.State_Machine
     {
         private static readonly int YVelocity = Animator.StringToHash("yVelocity");
 
-        public FiniteStateMachine StateMachine;
+        protected FiniteStateMachine StateMachine;
 
         public EntityConfig entityConfig;
 
@@ -31,10 +31,7 @@ namespace Game._Scripts.Enemies.State_Machine
         private float lastDamageTime;
 
         private Vector2 velocityWorkspace;
-
-        protected bool IsStunned;
-        protected bool IsDead;
-
+        
         public virtual void Awake()
         {
             Core = GetComponentInChildren<Core>();
@@ -51,11 +48,6 @@ namespace Game._Scripts.Enemies.State_Machine
             StateMachine.CurrentState.LogicUpdate();
 
             Anim.SetFloat(YVelocity, Movement.Rb.linearVelocity.y);
-
-            if(Time.time >= lastDamageTime + entityConfig.stunRecoveryTime)
-            {
-                ResetStunResistance();
-            }
         }
 
         public virtual void FixedUpdate()
@@ -78,16 +70,9 @@ namespace Game._Scripts.Enemies.State_Machine
             return Physics2D.Raycast(playerCheck.position, transform.right, entityConfig.closeRangeActionDistance, entityConfig.whatIsPlayer);
         }
 
-        // public virtual void DamageHop(float velocity)
-        // {
-        //     velocityWorkspace.Set(Movement.Rb.linearVelocity.x, velocity);
-        //     Movement.Rb.linearVelocity = velocityWorkspace;
-        // }
-
-        public virtual void ResetStunResistance()
+        public virtual void ResetState()
         {
-            IsStunned = false;
-            //currentStunResistance = entityConfig.stunResistance;
+            
         }
 
         //public virtual void OnDrawGizmos()

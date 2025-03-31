@@ -35,5 +35,11 @@ namespace Game._Scripts.Cores.CoreComponents
             currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
             currentHealth += amount;
         }
+
+        public void RestoreFullHealth()
+        {
+            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+            currentHealth = maxHealth;
+        }
     }
 }

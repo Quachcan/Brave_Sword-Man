@@ -7,8 +7,8 @@ namespace Game._Scripts.CheckPoint
     public class CheckPoint : MonoBehaviour
     {
         [Header("Srpites")]
-        [SerializeField] private Animator animator;
-        [SerializeField] private string isActivateParam = "IsActivated";
+        private Animator animator;
+        private readonly string isActivateParam = "IsActivated";
         
         [Header("Settings")]
         [SerializeField] private AudioClip activatedSrpiteSound;
@@ -25,7 +25,7 @@ namespace Game._Scripts.CheckPoint
         {
             if (other.CompareTag("Player"))
             {
-                EnemyManager.Instance.RespawnEnemy();
+                EnemyManager.Instance.RespawnAllEnemies();
                 if (!isActivated)
                 {
                     ActivateCheckPoint();
@@ -46,8 +46,7 @@ namespace Game._Scripts.CheckPoint
             {
                 //AudioSource.PlayClipAtPoint(activatedSrpiteSound, transform.position);
             }
-            
-            Debug.Log("CheckPoint activated");
         }
+        
     }
 }

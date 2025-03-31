@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Game._Scripts.Enemies.State_Machine;
 using UnityEngine;
@@ -6,9 +7,20 @@ namespace Game._Scripts.Manager
 {
     public class EnemyManager : MonoBehaviour
     {
-        public static EnemyManager Instance { get;  set; }
+        public static EnemyManager Instance { get;  private set ; }
         
         [SerializeField] private List<Entity> enemies = new List<Entity>();
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
         public void RegisterEnemy(Entity enemy)
         {
@@ -27,7 +39,7 @@ namespace Game._Scripts.Manager
             }
         }
 
-        public void RespawnEnemy()
+        public void RespawnAllEnemies()
         {
             Debug.Log($"Respawning enemey");
             Debug.Log(enemies.Count);
@@ -35,10 +47,18 @@ namespace Game._Scripts.Manager
             {
                 if (!enemy.gameObject.activeSelf)
                 {
+                    enemy.ResetState();
                     enemy.gameObject.SetActive(true);
                     Debug.Log("Respawned enemy: " + enemy.gameObject.name);
                 }
             }
         }
+    }
+
+    [System.Serializable]
+    public class EnemyData
+    {
+        public GameObject enemyPrefab;
+        public Vector3 spawnPosition;
     }
 }

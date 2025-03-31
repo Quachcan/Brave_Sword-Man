@@ -1,3 +1,4 @@
+using Game._Scripts.Manager;
 using UnityEngine;
 
 namespace Game._Scripts.Cores.CoreComponents
@@ -12,8 +13,14 @@ namespace Game._Scripts.Cores.CoreComponents
         private Stats Stats => stats ? stats : Core.GetCoreComponent(ref stats);
         private Stats stats;
 
-        public void Die()
+        private void Die()
         {
+            if (!Core.transform.parent.CompareTag("Enemy"))
+            {
+                Core.transform.parent.gameObject.SetActive(false);
+                return;
+            }
+            
             foreach (var particle in deathParticles)
             {
                 ParticleManager.StartParticle(particle);

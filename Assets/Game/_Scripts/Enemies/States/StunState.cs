@@ -49,7 +49,6 @@ namespace Game._Scripts.Enemies.States
         public override void Exit()
         {
             base.Exit();
-            Entity.ResetStunResistance();
         }
 
         public override void LogicUpdate()

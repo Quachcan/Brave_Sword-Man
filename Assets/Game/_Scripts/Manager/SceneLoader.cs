@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+namespace Game._Scripts.Manager
 {
-    // Start is called before the first frame update
-    void Start()
+    public class SceneLoader : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Awake()
+        {
+            SceneManager.LoadScene("Map_2", LoadSceneMode.Additive);
+            SceneManager.LoadScene("Map_3", LoadSceneMode.Additive);
+        }
     }
 }

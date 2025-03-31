@@ -1,3 +1,4 @@
+using Game._Scripts.Cores.CoreComponents;
 using Game._Scripts.Enemies.State_Machine;
 using Game._Scripts.Enemies.States.Configs;
 using Game._Scripts.Manager;
@@ -8,6 +9,9 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy3
 {
     public class Enemy3 : Entity
     {
+        private Stats Stats => stats ?? Core.GetCoreComponent(ref stats);
+        private Stats stats;
+        
         public E3MoveState MoveState { get; private set; }
         public E3IdleState IdleState { get; private set; }
         public E3PlayerDetectedState PlayerDetectedState { get; private set; }
@@ -27,7 +31,6 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy3
         {
             base.Awake();   
             
-            EnemyManager.Instance.RegisterEnemy(this);
             
             IdleState = new E3IdleState(this, StateMachine, "idle",  idleStateConfig, this);
             MoveState = new E3MoveState(this, StateMachine, "move", moveStateConfig, this);
@@ -40,7 +43,18 @@ namespace Game._Scripts.Enemies.EnemySpecific.Enemy3
 
         private void Start()
         {
+            EnemyManager.Instance.RegisterEnemy(this);
             StateMachine.Initialize(MoveState);
+        }
+        public override void ResetState()
+        {
+            base.ResetState();
+            if (Stats != null)
+            {
+                Stats.RestoreFullHealth();
+            }
+            
+            StateMachine.Initialize(IdleState);
         }
     }
 }

@@ -38,21 +38,20 @@ namespace Game._Scripts.Manager
             currentState = GameState.GameStart;
             isRunning = true;
         }
+        
 
         private void InitializeAllScripts()
         {
-            Debug.Log("Initialized all Scripts");
-            
-            if (enemyManager == null && enemyManagerPrefab != null)
-            {
-                enemyManager = Instantiate(enemyManagerPrefab, transform);
-                Debug.Log("EnemyManager instantiated: " + enemyManager.name);
-            }
-            else
-            {
-                Debug.Log("Not Initialized");
-            }
-            EnemyManager.Instance = enemyManager;
+            // if (enemyManager == null && enemyManagerPrefab != null)
+            // {
+            //     enemyManager = Instantiate(enemyManagerPrefab, transform);
+            //     Debug.Log("EnemyManager instantiated: " + enemyManager.name);
+            // }
+            // else
+            // {
+            //     Debug.Log("Not Initialized");
+            // }
+            // EnemyManager.Instance = enemyManager;
             playerManager.Initialize();
         }
 
