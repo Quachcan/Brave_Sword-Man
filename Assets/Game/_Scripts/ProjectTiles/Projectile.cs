@@ -58,6 +58,9 @@ namespace Game._Scripts.ProjectTiles
             if (hasHitTarget) return;
             Collider2D damageHit = Physics2D.OverlapCircle(damagePosition.position, damageRadius, whatIsPlayer);
             Collider2D groundHit = Physics2D.OverlapCircle(damagePosition.position, damageRadius, whatIsGround);
+
+            //Debug.Log("GroundHit: " + (groundHit ? groundHit.gameObject.name : "none"));
+
                 
             if (damageHit)
             {
